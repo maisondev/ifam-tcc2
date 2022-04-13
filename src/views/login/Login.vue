@@ -1,6 +1,82 @@
 <template>
-  <div>
-    <h1>Login</h1>
+  <div class="container mx-auto">
+    <div class="flex ">
+        <div class="w-full h-full  border-r-2 ">
+          <div class="w-full h-full my-4">
+            <h1 class="text-blue-600 font-semibold text-center text-lg my-8">Login</h1>
+            <p class="font-bold my-4">Tenha todos os seus dados de remuneração em um único lugar.</p>
+          </div>
+          <div class="relative flex py-5 items-center my-4">
+            <div class="flex-grow border-t border-gray-400"></div>
+            <span class="flex-shrink mx-4 text-gray-400">Entre com email e senha</span>
+            <div class="flex-grow border-t border-gray-400"></div>
+          </div>
+          <form>
+
+            <form>
+              <div class="text-center mx-auto">
+                <div class="mb-6 mx-10">
+                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 text-left font-bold">Email</label>
+                  <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required="">
+                </div>
+                <div class="mb-6 mx-10">
+                  <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 text-left font-bold">Senha</label>
+                  <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                </div>
+                <div class="flex items-start mb-6 mx-10">
+                  <div class="flex items-center h-5">
+                    <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required="">
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="remember" class="font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+                  </div>
+                </div>
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+              </div>
+
+            </form>
+
+
+          </form>
+        </div >
+        <div class="w-full h-full bg-blue-600 border-l-4">
+          <div class="w-full  h-full my-8 p-2">
+            <h1 class=" font-medium text-center text-gray-50 font-medium text-2xl py-4">Faça como mais de 1500 servidores públicos brasileiros</h1>
+          </div>
+          <div class="text-center">
+            <div class="flex w-full justify-around my-10">
+              <div class="flex mb-5 -space-x-4">
+                <img class="w-20 h-20 border-2 border-white rounded-full dark:border-gray-800" src='../../assets/images/foto1.png' alt="Imagen">
+                <img class="w-20 h-20 border-2 border-white rounded-full dark:border-gray-800" src="../../assets/images/foto2.png" alt="">
+                <img class="w-20 h-20 border-2 border-white rounded-full dark:border-gray-800" src="../../assets/images/foto3.png" alt="">
+                <img class="w-20 h-20 border-2 border-white rounded-full dark:border-gray-800" src="../../assets/images/foto4.png" alt="">
+              </div>
+
+            </div>
+            <div class="flex w-full justify-around my-10">
+              <div class="flex -space-x-4">
+                <img class="w-20 h-20 border-2 border-white rounded-full dark:border-gray-800" src='../../assets/images/foto5.png' alt="">
+                <img class="w-20 h-20 border-2 border-white rounded-full dark:border-gray-800" src='../../assets/images/foto6.png' alt="">
+                <img class="w-20 h-20 border-2 border-white rounded-full dark:border-gray-800" src='../../assets/images/foto7.png' alt="">
+                <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">+99</a>
+              </div>
+            </div>
+
+          </div>
+          <div class="my-4">
+            <h2 class="text-gray-50 text-xl font-semibold my-8">Obtenha informações relevantes sobre seus dados de remuneração</h2>
+          </div>
+          <div class="my-4">
+            <h2 class="text-gray-50 text-base font-medium my-4">Gráficos, insights, comparativos salariais e muito mais</h2>
+          </div>
+          <footer class="sticky bottom-auto my-8">
+            <p class="text-gray-50 my-4">Planos apartir de R$ 5,99</p>
+            <p class="text-gray-50 my-4">Assine agora</p>
+          </footer>
+        </div>
+
+
+    </div>
 
   </div>
 
