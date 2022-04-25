@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {dashboard} from "./modules/dashboard";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+
   state: {
   },
   mutations: {
@@ -11,5 +13,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    dashboard
   }
 })
