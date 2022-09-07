@@ -86,22 +86,22 @@
                   <td class="px-4 py-4">
                     {{ resultado[0].servidor.estadoExercicio.nome }}
                   </td>
-                  <td class="px-4 py-4">
+                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
                     {{ resultado[0].fichasCargoEfetivo[0].dataPublicacaoDocumentoIngressoServicoPublico }}
                   </td>
-                  <td class="px-4 py-4">
+                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
                     {{ resultado[0].fichasCargoEfetivo[0].jornadaTrabalho }}
                   </td>
-                  <td class="px-4 py-4">
+                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
                     {{ resultado[0].fichasCargoEfetivo[0].uorgLotacao }}
                   </td>
-                  <td class="px-4 py-4">
+                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
                     {{ resultado[0].fichasCargoEfetivo[0].cargo }}
                   </td>
-                  <td class="px-4 py-4">
+                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
                     {{ resultado[0].fichasCargoEfetivo[0].dataIngressoCargo }}
                   </td>
-                  <td class="px-4 py-4">
+                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
                     {{ resultado[0].fichasCargoEfetivo[0].formaIngresso }}
                   </td>
 

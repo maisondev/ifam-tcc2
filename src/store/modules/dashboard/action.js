@@ -8,7 +8,8 @@ export const actions = {
         const url = "/api-de-dados/servidores";
         console.log(typeof token);
         try{
-             return await axios.get(url, {params: {cpf: "20255497253", pagina: 1}})
+             return await axios.get(url, {params: {pagina:request.pagina,
+                 cpf:request.cpf}})
                 .then(function (response) {
                     console.log('response', response);
                     return response.data;
