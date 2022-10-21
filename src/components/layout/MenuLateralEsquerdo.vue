@@ -1,6 +1,5 @@
 <template>
-  <div class="h-full">
-
+  <div class="bg-gray-800 h-screen">
     <aside class="w-64 h-full" aria-label="Sidebar">
       <div class=" overflow-y-auto py-4 px-3 text-gray-50 rounded ">
         <ul class="space-y-2 ">

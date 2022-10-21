@@ -1,138 +1,138 @@
 <template>
-  <div>
-    <div class="flex h-screen">
-      <MenuLateralEsquerdo class="h-full bg-blue-600"></MenuLateralEsquerdo>
-      <div class="flex flex-row flex-wrap w-full">
-        <div class="flex-1 justify-around">
-          <h1 class="bg-blue-500 p-4 text-2xl text-gray-900 font-semibold text-4xl">Home</h1>
-        </div>
-        <div class="w-full">
-          <div>
-            <form @submit.prevent="buscaDadosServidor">
-              <div>
-                <label for="CPF">CPF</label>
-                <input class="" id="CPF" type="text" v-model="cpf">
-              </div>
-              <button class="bg-green-600 text-gray-50 px-4 py-2 rounded"> Buscar servidor</button>
-            </form>
-          </div>
-          <div>
-
-
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-
-              <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" class="px-6 py-3">
-                    Nome
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Tipo
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Situação
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Orgão
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Sigla
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Estado
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Ingresso
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Jornada
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Lotação
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Cargo
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    DataIngressoCargo
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Forma de Ingresso
-                  </th>
-
-                  <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Edit</span>
-                  </th>
-                </tr>
-                </thead>
-                <tbody v-if="resultado">
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                  <td class="px-6 py-4">
-                    {{ resultado[0].servidor.pessoa.nome }}
-                  </td>
-                  <td class="px-6 py-4">
-                    {{ resultado[0].servidor.pessoa.tipo }}
-                  </td>
-                  <td class="px-6 py-4">
-                    {{ resultado[0].servidor.situacao }}
-                  </td>
-                  <td class="px-4 py-4">
-                    {{ resultado[0].servidor.orgaoServidorLotacao.nome }}
-                  </td>
-                  <td class="px-4 py-4">
-                    {{ resultado[0].servidor.orgaoServidorLotacao.sigla }}
-                  </td>
-                  <td class="px-4 py-4">
-                    {{ resultado[0].servidor.estadoExercicio.nome }}
-                  </td>
-                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                    {{ resultado[0].fichasCargoEfetivo[0].dataPublicacaoDocumentoIngressoServicoPublico }}
-                  </td>
-                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                    {{ resultado[0].fichasCargoEfetivo[0].jornadaTrabalho }}
-                  </td>
-                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                    {{ resultado[0].fichasCargoEfetivo[0].uorgLotacao }}
-                  </td>
-                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                    {{ resultado[0].fichasCargoEfetivo[0].cargo }}
-                  </td>
-                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                    {{ resultado[0].fichasCargoEfetivo[0].dataIngressoCargo }}
-                  </td>
-                  <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                    {{ resultado[0].fichasCargoEfetivo[0].formaIngresso }}
-                  </td>
-
-                </tr>
-
-                </tbody>
-              </table>
-            </div>
-
-          </div>
-        </div>
+  <div class=" w-full my-4">
+    <form class="flex flex-wrap justify-around w-full" @submit.prevent="buscaDadosServidor">
+      <div class="block">
+        <label class="block text-gray-800 font-bold text-left" for="CPF">CPF:</label>
+        <input class="rounded" id="CPF" type="text" v-model="cpf">
+      </div>
+      <div class="flex items-end">
+        <button class="bg-green-600 px-4 py-2 rounded inline-flex items-center">
+      <span><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M15.5,12C18,12 20,14 20,16.5C20,17.38 19.75,18.21 19.31,18.9L22.39,22L21,23.39L17.88,20.32C17.19,20.75 16.37,21 15.5,21C13,21 11,19 11,16.5C11,14 13,12 15.5,12M15.5,14A2.5,2.5 0 0,0 13,16.5A2.5,2.5 0 0,0 15.5,19A2.5,2.5 0 0,0 18,16.5A2.5,2.5 0 0,0 15.5,14M10,4A4,4 0 0,1 14,8C14,8.91 13.69,9.75 13.18,10.43C12.32,10.75 11.55,11.26 10.91,11.9L10,12A4,4 0 0,1 6,8A4,4 0 0,1 10,4M2,20V18C2,15.88 5.31,14.14 9.5,14C9.18,14.78 9,15.62 9,16.5C9,17.79 9.38,19 10,20H2Z" />
+</svg></span>
+          <span class="text-gray-50">Buscar</span>
+        </button>
       </div>
 
+      <div class="flex w-full justify-around">
+        <hr class="border w-full border-gray-300 my-4">
+      </div>
+      <div class="">
+
+      </div>
+
+    </form>
+
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                      <tr>
+                        <th scope="col" class="px-6 py-3">
+                          Nome
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Tipo
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Situação
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Orgão
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Sigla
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Estado
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Ingresso
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Jornada
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Lotação
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Cargo
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          DataIngressoCargo
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Forma de Ingresso
+                        </th>
+
+                        <th scope="col" class="px-6 py-3">
+                          <span class="sr-only">Edit</span>
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody v-if="resultado">
+                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4">
+                          {{ resultado[0].servidor.pessoa.nome }}
+                        </td>
+                        <td class="px-6 py-4">
+                          {{ resultado[0].servidor.pessoa.tipo }}
+                        </td>
+                        <td class="px-6 py-4">
+                          {{ resultado[0].servidor.situacao }}
+                        </td>
+                        <td class="px-4 py-4">
+                          {{ resultado[0].servidor.orgaoServidorLotacao.nome }}
+                        </td>
+                        <td class="px-4 py-4">
+                          {{ resultado[0].servidor.orgaoServidorLotacao.sigla }}
+                        </td>
+                        <td class="px-4 py-4">
+                          {{ resultado[0].servidor.estadoExercicio.nome }}
+                        </td>
+                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
+                          {{ resultado[0].fichasCargoEfetivo[0].dataPublicacaoDocumentoIngressoServicoPublico }}
+                        </td>
+                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
+                          {{ resultado[0].fichasCargoEfetivo[0].jornadaTrabalho }}
+                        </td>
+                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
+                          {{ resultado[0].fichasCargoEfetivo[0].uorgLotacao }}
+                        </td>
+                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
+                          {{ resultado[0].fichasCargoEfetivo[0].cargo }}
+                        </td>
+                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
+                          {{ resultado[0].fichasCargoEfetivo[0].dataIngressoCargo }}
+                        </td>
+                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
+                          {{ resultado[0].fichasCargoEfetivo[0].formaIngresso }}
+                        </td>
+
+                      </tr>
+
+                      </tbody>
+                    </table>
     </div>
 
-
   </div>
+
+
 
 </template>
 
 <script>
 
-import MenuLateralEsquerdo from "../components/layout/MenuLateralEsquerdo";
 
 export default {
   name: 'Home',
-  components: {MenuLateralEsquerdo},
+  components: {},
   data() {
     return {
       cpf: undefined,
-      resultado: undefined
+      resultado: undefined,
+      responseServidorId: undefined
 
     }
   },
@@ -145,6 +145,12 @@ export default {
       }
       this.resultado =  await this.$store.dispatch("dashboard/serviceGetConsultaServidores", request);
       console.log("resultado", this.resultado);
+      let request2 = {
+        pagina:1,
+        id:this.resultado[0].servidor.idServidorAposentadoPensionista
+      }
+      this.responseServidorId = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresById",request2);
+      console.log(resultadoId)
     }
 
   }
