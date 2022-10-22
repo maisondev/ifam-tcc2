@@ -86,8 +86,9 @@ export default {
     }
   },
   methods:{
-    entrarNaAplicacao(){
-      this.$router.push("home");
+    async entrarNaAplicacao(){
+      await this.$store.commit('setAutenticado',true)
+      await this.$router.push("home");
     }
   }
 }

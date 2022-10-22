@@ -24,97 +24,78 @@
     </form>
 
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                      <tr>
-                        <th scope="col" class="px-6 py-3">
-                          Nome
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                          Tipo
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                          Situação
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                          Orgão
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                          Sigla
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                          Estado
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                          Ingresso
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                          Jornada
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                          Lotação
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                          Cargo
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                          DataIngressoCargo
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                          Forma de Ingresso
-                        </th>
-
-                        <th scope="col" class="px-6 py-3">
-                          <span class="sr-only">Edit</span>
-                        </th>
-                      </tr>
-                      </thead>
-                      <tbody v-if="resultado">
-                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4">
-                          {{ resultado[0].servidor.pessoa.nome }}
-                        </td>
-                        <td class="px-6 py-4">
-                          {{ resultado[0].servidor.pessoa.tipo }}
-                        </td>
-                        <td class="px-6 py-4">
-                          {{ resultado[0].servidor.situacao }}
-                        </td>
-                        <td class="px-4 py-4">
-                          {{ resultado[0].servidor.orgaoServidorLotacao.nome }}
-                        </td>
-                        <td class="px-4 py-4">
-                          {{ resultado[0].servidor.orgaoServidorLotacao.sigla }}
-                        </td>
-                        <td class="px-4 py-4">
-                          {{ resultado[0].servidor.estadoExercicio.nome }}
-                        </td>
-                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                          {{ resultado[0].fichasCargoEfetivo[0].dataPublicacaoDocumentoIngressoServicoPublico }}
-                        </td>
-                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                          {{ resultado[0].fichasCargoEfetivo[0].jornadaTrabalho }}
-                        </td>
-                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                          {{ resultado[0].fichasCargoEfetivo[0].uorgLotacao }}
-                        </td>
-                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                          {{ resultado[0].fichasCargoEfetivo[0].cargo }}
-                        </td>
-                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                          {{ resultado[0].fichasCargoEfetivo[0].dataIngressoCargo }}
-                        </td>
-                        <td v-if="resultado[0].fichasCargoEfetivo[0]" class="px-4 py-4">
-                          {{ resultado[0].fichasCargoEfetivo[0].formaIngresso }}
-                        </td>
-
-                      </tr>
-
-                      </tbody>
-                    </table>
+    <div class="overflow-x-auto relative">
+      <div class="py-2 rounded bg-gray-800 text-gray-50 w-full">Servidor</div>
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="py-3 px-6">
+            Nome
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Situação
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Orgão
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <th v-if="servidor" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{servidor.pessoa.nome}}
+          </th>
+          <td v-if="servidor" class="py-4 px-6">
+            {{servidor.situacao}}
+          </td>
+          <td v-if="servidor" class="py-4 px-6">
+            <span class="mx-1">{{servidor.orgaoServidorLotacao.nome}}</span>-<span class="mx-1">{{servidor.orgaoServidorLotacao.sigla}}</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
+    <hr>
+    <div class="overflow-x-auto relative">
+      <div class="py-2 rounded bg-gray-800 text-gray-50 w-full">Cargo</div>
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="py-3 px-6">
+            Cargo
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Ingresso
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Jornada de trabalho
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Lotação
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <th v-if="cargo" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{cargo.cargo}}
+          </th>
+          <th v-if="cargo" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{cargo.dataIngressoServicoPublico}}
+          </th>
+          <td v-if="servidor" class="py-4 px-6">
+            {{cargo.jornadaTrabalho}}
+          </td>
+          <td v-if="cargo" class="py-4 px-6">
+            <span class="mx-1">{{cargo.uorgLotacao}}</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+
+
 
   </div>
 
@@ -132,7 +113,9 @@ export default {
     return {
       cpf: undefined,
       resultado: undefined,
-      responseServidorId: undefined
+      responseServidorId: undefined,
+      servidor: undefined,
+      cargo: undefined
 
     }
   },
@@ -144,13 +127,16 @@ export default {
         cpf: this.cpf
       }
       this.resultado =  await this.$store.dispatch("dashboard/serviceGetConsultaServidores", request);
+      this.servidor = this.resultado[0].servidor;
+      this.cargo=this.resultado[0].fichasCargoEfetivo[0];
+      localStorage.setItem("orgaoServidor",JSON.stringify(this.servidor.orgaoServidorExercicio));
       console.log("resultado", this.resultado);
-      let request2 = {
-        pagina:1,
-        id:this.resultado[0].servidor.idServidorAposentadoPensionista
-      }
-      this.responseServidorId = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresById",request2);
-      console.log(resultadoId)
+      // let request2 = {
+      //   pagina:1,
+      //   id:this.resultado[0].servidor.idServidorAposentadoPensionista
+      // }
+      // this.responseServidorId = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresById",request2);
+      // console.log(resultadoId)
     }
 
   }

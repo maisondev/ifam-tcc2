@@ -1,11 +1,11 @@
 <template>
   <div id="app" class="flex flex-wrap h-full w-full">
-    <Header class="w-full"></Header>
-    <div class="w-3/12">
-      <MenuLateralEsquerdo class=""></MenuLateralEsquerdo>
+    <Header v-if="estaAutenticado" class="w-full"></Header>
+    <div v-if="estaAutenticado" class="w-3/12">
+      <MenuLateralEsquerdo  class=""></MenuLateralEsquerdo>
     </div>
-    <div class="w-9/12 flex">
-      <div class="w-11/12 mx-auto">
+    <div  class="flex-1 flex justify-around">
+      <div class="w-11/12">
         <router-view/>
       </div>
 
@@ -13,7 +13,7 @@
 
 
 
-    <Footer></Footer>
+    <Footer v-if="estaAutenticado"></Footer>
   </div>
 </template>
 
@@ -29,6 +29,19 @@ export default {
     MenuLateralEsquerdo,
     Header,
     Footer
+  },
+  data(){
+    return{
+      classeAutenticado: 'w-8/12'
+    }
+  },
+  created() {
+    this.$store.commit('setAutenticado',false)
+  },
+  computed:{
+    estaAutenticado(){
+      return this.$store.getters.autenticado;
+    }
   }
 }
 

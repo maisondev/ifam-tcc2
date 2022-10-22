@@ -1,3 +1,7 @@
 export const mutations = {
 
+    setAutenticado(){
+
+    }
+
 }
