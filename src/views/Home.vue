@@ -1,5 +1,5 @@
 <template>
-  <div class=" w-full my-4">
+  <div class="px-4 w-full my-4">
     <form class="flex flex-wrap justify-around w-full" @submit.prevent="buscaDadosServidor">
       <div class="block">
         <label class="block text-gray-800 font-bold text-left" for="CPF">CPF:</label>
@@ -24,7 +24,7 @@
     </form>
 
 
-    <div class="overflow-x-auto relative">
+    <div v-if="servidor" class="overflow-x-auto relative border my-2">
       <div class="py-2 rounded bg-gray-800 text-gray-50 w-full">Servidor</div>
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -42,7 +42,7 @@
         </thead>
         <tbody>
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <th v-if="servidor" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <th  scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {{servidor.pessoa.nome}}
           </th>
           <td v-if="servidor" class="py-4 px-6">
@@ -55,10 +55,9 @@
         </tbody>
       </table>
     </div>
-    <hr>
-    <div class="overflow-x-auto relative">
-      <div class="py-2 rounded bg-gray-800 text-gray-50 w-full">Cargo</div>
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <div v-if="cargo" class="overflow-x-auto relative border my-2">
+      <div  class="py-2 rounded bg-gray-800 text-gray-50 w-full">Cargo</div>
+      <table  class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="py-3 px-6">
@@ -77,13 +76,13 @@
         </thead>
         <tbody>
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <th v-if="cargo" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <th  scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {{cargo.cargo}}
           </th>
           <th v-if="cargo" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {{cargo.dataIngressoServicoPublico}}
           </th>
-          <td v-if="servidor" class="py-4 px-6">
+          <td v-if="cargo" class="py-4 px-6">
             {{cargo.jornadaTrabalho}}
           </td>
           <td v-if="cargo" class="py-4 px-6">

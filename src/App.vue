@@ -1,15 +1,19 @@
 <template>
-  <div id="app" class="flex flex-wrap h-full w-full">
-    <Header v-if="estaAutenticado" class="w-full"></Header>
-    <div v-if="estaAutenticado" class="w-3/12">
-      <MenuLateralEsquerdo  class=""></MenuLateralEsquerdo>
-    </div>
-    <div  class="flex-1 flex justify-around">
-      <div class="w-11/12">
-        <router-view/>
+  <div id="app" class="flex flex-col">
+    <Header v-if="estaAutenticado" class="flex flex-row"> </Header>
+    <div class="flex flex-row">
+      <div v-if="estaAutenticado" class="flex flex-col">
+        <MenuLateralEsquerdo class="h-auto"></MenuLateralEsquerdo>
       </div>
+      <div class="flex flex-col overflow-x-auto">
+        <div class="w-auto">
+          <router-view/>
+        </div>
 
+      </div>
     </div>
+
+
 
 
 
