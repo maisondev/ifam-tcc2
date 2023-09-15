@@ -6,6 +6,7 @@ import DashBoard from "../views/dashboard/DashBoard";
 import Rendimentos from "../views/rendimentos/Rendimentos";
 import Perfil from "../views/perfil/Perfil";
 import Organizacoes from "../views/organizacoes/Organizacoes";
+import Servidores from "../views/servidores/Servidores"
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,11 @@ const routes = [
     path: '/',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/servidores',
+    name: 'Servidores',
+    component: Servidores
   },
   {
     path: '/dashboard',

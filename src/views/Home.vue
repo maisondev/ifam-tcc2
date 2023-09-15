@@ -1,9 +1,9 @@
 <template>
-  <div class="px-4 w-full my-4">
-    <form class="flex flex-wrap justify-around w-full" @submit.prevent="buscaDadosServidor">
+  <div class="px-4 w-full my-4 h-full">
+    <form class="flex flex-wrap justify-around w-full" @submit.prevent="getServidorController">
       <div class="block">
         <label class="block text-gray-800 font-bold text-left" for="CPF">CPF:</label>
-        <input class="rounded" id="CPF" type="text" v-model="cpf">
+        <input class="rounded" id="CPF" type="text" v-model="cpf" required>
       </div>
       <div class="flex items-end">
         <button class="bg-green-600 px-4 py-2 rounded inline-flex items-center">
@@ -24,10 +24,10 @@
     </form>
 
 
-    <div v-if="servidor" class="overflow-x-auto relative border my-2">
-      <div class="py-2 rounded bg-gray-800 text-gray-50 w-full">Servidor</div>
+    <div v-if="servidor" class="overflow-x-auto relative border my-4 ">
+      <div class="py-2 rounded bg-gray-800 text-gray-50 w-full ">Servidor</div>
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="py-3 px-6">
             Nome
@@ -38,30 +38,82 @@
           <th scope="col" class="py-3 px-6">
             Orgão
           </th>
+          <th scope="col" class="py-3 px-6">
+            Matrícula
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Estado exercício
+          </th>
         </tr>
+
         </thead>
         <tbody>
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
           <th  scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {{servidor.pessoa.nome}}
           </th>
+
           <td v-if="servidor" class="py-4 px-6">
             {{servidor.situacao}}
           </td>
           <td v-if="servidor" class="py-4 px-6">
             <span class="mx-1">{{servidor.orgaoServidorLotacao.nome}}</span>-<span class="mx-1">{{servidor.orgaoServidorLotacao.sigla}}</span>
           </td>
+          <td v-if="servidor" class="py-4 px-6">
+            {{servidor.codigoMatriculaFormatado}}
+          </td>
+          <td v-if="servidor" class="py-4 px-6">
+            <span class="mx-1">{{servidor.estadoExercicio.nome}}</span>-<span class="mx-1">{{servidor.estadoExercicio.sigla}}</span>
+          </td>
+
+        </tr>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+          <th scope="col" class="py-3 px-6">
+            Possui Afastamento?
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Função
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Orgão Vinculado
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Tipo servidor
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Pensionista
+          </th>
+        </tr>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <th  scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{servidor.flagAfastado}}
+          </th>
+          <td v-if="servidor" class="py-4 px-6">
+            {{servidor.funcao.descricaoFuncaoCargo}}
+          </td>
+          <td v-if="servidor" class="py-4 px-6">
+            <span class="mx-1">{{servidor.orgaoServidorExercicio.nomeOrgaoVinculado}}</span>
+          </td>
+          <td v-if="servidor" class="py-4 px-6">
+            <span class="mx-1">{{servidor.tipoServidor}}</span>
+          </td>
+          <td v-if="servidor" class="py-4 px-6">
+            <span class="mx-1">{{servidor.servidorInativoInstuidorPensao.nome}}</span>
+          </td>
         </tr>
         </tbody>
       </table>
     </div>
-    <div v-if="cargo" class="overflow-x-auto relative border my-2">
+    <div v-if="cargo" class="overflow-x-auto relative border my-4">
       <div  class="py-2 rounded bg-gray-800 text-gray-50 w-full">Cargo</div>
       <table  class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="py-3 px-6">
             Cargo
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Classe
           </th>
           <th scope="col" class="py-3 px-6">
             Ingresso
@@ -79,6 +131,9 @@
           <th  scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {{cargo.cargo}}
           </th>
+          <th  scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{cargo.classeCargo}}
+          </th>
           <th v-if="cargo" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {{cargo.dataIngressoServicoPublico}}
           </th>
@@ -89,10 +144,80 @@
             <span class="mx-1">{{cargo.uorgLotacao}}</span>
           </td>
         </tr>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+          <th scope="col" class="py-3 px-6">
+            Data Ingresso Cargo
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Data Ingresso Orgao
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Data Ingresso Servico Publico
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Data Publicacao Documento
+          </th>
+          <th scope="col" class="py-3 px-6">
+            Forma Ingresso
+          </th>
+        </tr>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <th  scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{cargo.dataIngressoCargo}}
+          </th>
+          <th  scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{cargo.dataIngressoOrgao}}
+          </th>
+          <th v-if="cargo" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{cargo.dataIngressoServicoPublico}}
+          </th>
+          <td v-if="cargo" class="py-4 px-6">
+            {{cargo.dataPublicacaoDocumentoIngressoServicoPublico}}
+          </td>
+          <td v-if="cargo" class="py-4 px-6">
+            <span class="mx-1">{{cargo.formaIngresso}}</span>
+          </td>
+        </tr>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+          <th scope="col" class="py-3 px-6">
+            nivel Cargo
+          </th>
+          <th scope="col" class="py-3 px-6">
+            orgao Exercicio
+          </th>
+          <th scope="col" class="py-3 px-6">
+            orgao Lotacao
+          </th>
+          <th scope="col" class="py-3 px-6">
+            regime Juridico
+          </th>
+          <th scope="col" class="py-3 px-6">
+            situacao Servidor
+          </th>
+        </tr>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <th  scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{cargo.nivelCargo}}
+          </th>
+          <th  scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{cargo.orgaoExercicio}}
+          </th>
+          <th v-if="cargo" scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{cargo.orgaoLotacao}}
+          </th>
+          <td v-if="cargo" class="py-4 px-6">
+            {{cargo.regimeJuridico}}
+          </td>
+          <td v-if="cargo" class="py-4 px-6">
+            <span class="mx-1">{{cargo.situacaoServidor}}</span>
+          </td>
+        </tr>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+        </tr>
         </tbody>
       </table>
     </div>
-    <hr>
+    <hr class="mt-10">
 
 
 
@@ -112,7 +237,7 @@ export default {
     return {
       cpf: undefined,
       resultado: undefined,
-      responseServidorId: undefined,
+      servidorById: undefined,
       servidor: undefined,
       cargo: undefined
 
@@ -120,12 +245,13 @@ export default {
   },
 
   methods: {
-    async  buscaDadosServidor() {
-      let request = {
+    async buscaDadosServidorPeps() {
+      const request = {
         pagina: 1,
         cpf: this.cpf
       }
-      this.resultado =  await this.$store.dispatch("dashboard/serviceGetConsultaServidores", request);
+      console.log("request",request);
+      this.resultado =  await this.$store.dispatch("dashboard/serviceGetConsultaPepsServidor", request);
       this.servidor = this.resultado[0].servidor;
       this.cargo=this.resultado[0].fichasCargoEfetivo[0];
       localStorage.setItem("orgaoServidor",JSON.stringify(this.servidor.orgaoServidorExercicio));
@@ -136,6 +262,34 @@ export default {
       // }
       // this.responseServidorId = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresById",request2);
       // console.log(resultadoId)
+    },
+    async  getServidorController() {
+      console.log("getServidorController")
+      const request = {
+        pagina: 1,
+        cpf: this.cpf,
+        nome: this.nome
+      }
+      console.log("request",request);
+      const response =  await this.$store.dispatch("dashboard/serviceGetConsultaServidores", request);
+      console.log("response",response)
+      this.servidor = response[0].servidor;
+      console.log("servidor",this.servidor);
+      this.cargo=response[0].fichasCargoEfetivo[0];
+      console.log("cargo",this.cargo);
+      localStorage.setItem("orgaoServidor",JSON.stringify(this.servidor.orgaoServidorExercicio));
+     await this.getPesquisarServidorByIdController();
+    },
+
+    async getPesquisarServidorByIdController(){
+      console.log("getPesquisarServidorByIdController",this.servidor);
+      const request = {
+        id: this.servidor.idServidorAposentadoPensionista,
+      }
+      console.log("request",request);
+      const response = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresById",request);
+      this.servidorById = response;
+      console.log("response 2",response)
     }
 
   }

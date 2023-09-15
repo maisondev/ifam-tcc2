@@ -1,9 +1,9 @@
 <template>
-  <div id="app" class="flex flex-col">
-    <Header v-if="estaAutenticado" class="flex flex-row"> </Header>
-    <div class="flex flex-row">
-      <div v-if="estaAutenticado" class="flex flex-col">
-        <MenuLateralEsquerdo class="h-auto"></MenuLateralEsquerdo>
+  <div id="app" class="flex flex-col ">
+    <Header v-if="estaAutenticado" class="flex flex-row "> </Header>
+    <div class="flex flex-row h-max">
+      <div v-if="estaAutenticado" class="flex flex-col h-screen">
+        <MenuLateralEsquerdo class="h-full"></MenuLateralEsquerdo>
       </div>
       <div class="flex flex-col overflow-x-auto">
         <div class="w-auto">
@@ -12,12 +12,7 @@
 
       </div>
     </div>
-
-
-
-
-
-    <Footer v-if="estaAutenticado"></Footer>
+    <Footer class="bottom-0 fixed" v-if="estaAutenticado"></Footer>
   </div>
 </template>
 
