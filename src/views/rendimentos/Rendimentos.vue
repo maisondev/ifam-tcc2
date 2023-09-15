@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    <form class="flex flex-wrap justify-between w-full" @submit.prevent="getRemuneracaoServidorController">
+  <div class="container mx-auto w-full">
+    <form class="p-8 flex flex-wrap justify-between w-full" @submit.prevent="getRemuneracaoServidorController">
       <div class="flex my-4 flex  items-center">
         <div class="inline-block">
           <label class="block text-gray-800 font-bold text-left" for="CPF">CPF:</label>
