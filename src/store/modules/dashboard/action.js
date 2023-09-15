@@ -22,26 +22,6 @@ export const actions = {
         }
 
     },
-    async serviceGetConsultaRemuneracoesServidor({commit}, request) {
-        console.log('serviceGetConsultaRemuneracoesServidor',request)
-        const url = "/api-de-dados/servidores/remuneracao";
-        try{
-            return await axios.get(url, {params: {pagina:request.pagina,
-                    orgaoServidorExercicio:request.orgaoServidorExercicio}})
-                .then(function (response) {
-                    console.log('response', response);
-                    return response.data;
-                })
-                .catch(function (error) {
-                    console.log('Erro', error)
-                });
-        }catch (e) {
-            console.log('Erro ao consultar remuneração',e)
-
-        }
-
-    },
-
 
     async serviceGetConsultaServidores(context, request) {
         console.log('serviceGetConsultaServidores',request)
@@ -51,26 +31,6 @@ export const actions = {
                  cpf:request.cpf, nome: request.nome}})
                 .then(function (response) {
                     console.log('response', response.data);
-                    return response.data;
-                })
-                .catch(function (error) {
-                    console.log('Erro', error)
-                });
-        }catch (e) {
-            console.log('Erro ao consultar',e)
-
-        }
-
-    },
-
-    async serviceGetConsultaServidoresOrgaos({commit}, request) {
-        console.log('serviceGetConsultaServidoresOrgaos',request)
-        const url = "/api-de-dados/servidores";
-        try{
-            return await axios.get(url, {params: {pagina:request.pagina,
-                    orgaoServidorExercicio:request.orgaoServidorExercicio}})
-                .then(function (response) {
-                    console.log('response', response);
                     return response.data;
                 })
                 .catch(function (error) {
@@ -101,6 +61,75 @@ export const actions = {
 
         }
 
-    }
+    },
+
+    async serviceGetConsultaFuncoesCargos(context, request) {
+        console.log('serviceGetConsultaFuncoesCargos',request)
+        const url = `/api-de-dados/servidores/funcoes-e-cargos`;
+        try{
+            return await axios.get(url,{params: {pagina:request.pagina,
+                    }} )
+                .then(function (response) {
+                    console.log('response axios', response.data);
+                    return response.data;
+                })
+                .catch(function (error) {
+                    console.log('Erro', error)
+                });
+        }catch (erro) {
+            console.log(
+                "Erro ao consultar cargos e funções",erro);
+
+        }
+
+    },
+
+    async serviceGetConsultaServidoresByOrgaos(context, request) {
+        console.log('serviceGetConsultaServidoresByOrgaos',request)
+        const url = "/api-de-dados/servidores/por-orgao";
+        try{
+            return await axios.get(url, {params: {licenca:parseInt(request.licenca),
+                        orgaoExercicio:request.orgaoExercicio,
+                    orgaoLotacao: request.orgaoLotacao,
+                    pagina:request.pagina,
+                    tipoServidor: request.tipoServidor,
+                    tipoVinculo: request.tipoVinculo}})
+                .then(function (response) {
+                    console.log('response', response);
+                    return response.data;
+                })
+                .catch(function (error) {
+                    console.log('Erro', error)
+                });
+        }catch (e) {
+            console.log('Erro ao consultar servidores por orgão',e)
+
+        }
+
+    },
+
+
+
+    async serviceGetConsultaRemuneracoesServidor(context, request) {
+        console.log('serviceGetConsultaRemuneracoesServidor',request)
+        const url = "/api-de-dados/servidores/remuneracao";
+        try{
+            return await axios.get(url, {params: {cpf: request.cpf,
+                    id: request.id,
+                    mesAno: request.mesAno,
+                    pagina:request.pagina}})
+                .then(function (response) {
+                    console.log('response', response);
+                    return response.data;
+                })
+                .catch(function (error) {
+                    console.log('Erro', error)
+                });
+        }catch (e) {
+            console.log('Erro ao consultar remuneração',e)
+
+        }
+
+    },
 
 }

@@ -1,7 +1,6 @@
 <template>
   <div class="">
-    {{resultado}}
-    <form class="flex flex-wrap justify-between w-full" @submit.prevent="buscaDadosServidor">
+    <form class="flex flex-wrap justify-between w-full" @submit.prevent="getRemuneracaoServidorController">
       <div class="flex my-4 flex  items-center">
         <div class="inline-block">
           <label class="block text-gray-800 font-bold text-left" for="CPF">CPF:</label>
@@ -19,7 +18,7 @@
       <div class="flex w-2/12 my-4">
         <div class="w-full">
           <label for="mes" class="uppercase text-left font-bold text-gray-800">ano</label>
-          <v-select class="w-full" :options="listaAnos" v-model="ano"></v-select>
+          <v-select class="w-full" :options="listaAnos.reverse()" v-model="ano"></v-select>
         </div>
       </div>
 
@@ -108,17 +107,19 @@ export default {
         {mes: '04', label: "Abril"},{mes: '05', label: "Maio"},{mes: '06', label: "Junho"},
         {mes: '07', label: "Julho"},{mes: '08', label: "Agosto"},{mes: '09', label: "Setembro"},
         {mes: '10', label: "Outubro"},{mes: '11', label: "Novembro"},{mes: '12', label: "Dezembro"}],
-      listaAnos:[2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022]
+      listaAnos:[2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023]
     }
   },
 
 
   methods:{
-    async  buscaDadosServidor() {
-      let request = {
-        pagina: 1,
+    async  getRemuneracaoServidorController() {
+      console.log("getRemuneracaoServidorController");
+      const request = {
         cpf: this.cpf,
-        mesAno:this.ano+this.mes
+        id: this.servidor?this.servidor.idServidorPensionista:null,
+        mesAno:this.ano+this.mes,
+        pagina: 1,
       }
       console.log('request',request)
       this.resultado =  await this.$store.dispatch("dashboard/serviceGetConsultaRemuneracoesServidor", request);

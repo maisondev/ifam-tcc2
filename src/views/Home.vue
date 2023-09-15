@@ -22,8 +22,6 @@
       </div>
 
     </form>
-
-
     <div v-if="servidor" class="overflow-x-auto relative border my-4 ">
       <div class="py-2 rounded bg-gray-800 text-gray-50 w-full ">Servidor</div>
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -218,9 +216,12 @@
       </table>
     </div>
     <hr class="mt-10">
-
-
-
+    <div class="my-20">
+<!--      <span class="my-20">{{cargosFuncoes}}</span>-->
+    </div>
+    <div>
+      <span>{{remuneracao}}</span>
+    </div>
   </div>
 
 
@@ -239,7 +240,9 @@ export default {
       resultado: undefined,
       servidorById: undefined,
       servidor: undefined,
-      cargo: undefined
+      cargo: undefined,
+      cargosFuncoes: undefined,
+      remuneracao: undefined
 
     }
   },
@@ -289,7 +292,60 @@ export default {
       console.log("request",request);
       const response = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresById",request);
       this.servidorById = response;
-      console.log("response 2",response)
+      console.log("response 2",response);
+      await this.getPesquisarFuncoesCargosController();
+    },
+
+    async getPesquisarFuncoesCargosController(){
+      console.log("getPesquisarFuncoesCargosController");
+      const request = {
+        pagina: 20,
+      }
+      console.log("request",request);
+      const response = await this.$store.dispatch("dashboard/serviceGetConsultaFuncoesCargos",request);
+      this.cargosFuncoes = response;
+      console.log("response 3",response);
+      await this.getPesquisarServidoresByOrgaosController();
+    },
+
+    async getPesquisarServidoresByOrgaosController(){
+      console.log("getPesquisarServidoresByOrgaosController",this.servidor);
+      const request = {
+        pagina: 1,
+        licenca: 0,
+        orgaoExercicio: this.servidor.orgaoServidorExercicio.codigo,
+        orgaoLotacao: this.servidor.orgaoServidorLotacao.codigo,
+        tipoServidor: this.servidor.tipoServidor == "Civil" ? 1:2,
+      }
+      console.log("request",request);
+      const response = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresByOrgaos",request);
+      this.cargosFuncoes = response;
+      console.log("response 4",response);
+      this.getRemuneracaoServidorController();
+    },
+
+    async  getRemuneracaoServidorController() {
+      console.log("getRemuneracaoServidorController");
+      const request = {
+        cpf: this.cpf,
+        id: this.servidor.idServidorAposentadoPensionista?this.servidor.idServidorAposentadoPensionista: undefined,
+        mesAno:202307,
+        pagina: 1,
+      }
+      console.log('request',request)
+      this.remuneracao =  await this.$store.dispatch("dashboard/serviceGetConsultaRemuneracoesServidor", request);
+      this.remuneracao = this.resultado[0].remuneracoesDTO[0];
+      this.descontos = this.resultado[0].remuneracoesDTO[0].rubricas;
+      this.totalDescontos = this.descontos.reduce(function (soma,desconto,indice){
+        console.log('soma',soma,'desconto',desconto.valor,'indice',indice)
+        console.log('soma',typeof soma,'desconto',typeof desconto.valor,'indice',typeof indice)
+        if (indice>0){
+          console.log('soma',soma)
+          return soma + parseInt(desconto.valor);
+        }
+
+      },0)
+      console.log("totalDescontos", this.totalDescontos);
     }
 
   }
