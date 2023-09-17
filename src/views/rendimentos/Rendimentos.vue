@@ -18,7 +18,7 @@
       <div class="flex w-2/12 my-4">
         <div class="w-full">
           <label for="mes" class="uppercase text-left font-bold text-gray-800">ano</label>
-          <v-select class="w-full" :options="listaAnos.reverse()" v-model="ano"></v-select>
+          <v-select class="w-full" :options="listaAnos" v-model="ano"></v-select>
         </div>
       </div>
 
@@ -124,7 +124,7 @@ export default {
       console.log('request',request)
       this.resultado =  await this.$store.dispatch("dashboard/serviceGetConsultaRemuneracoesServidor", request);
       this.remuneracao = this.resultado[0].remuneracoesDTO[0];
-      this.descontos = this.resultado[0].remuneracoesDTO[0].rubricas;
+      this.descontos = this.resultado[0].remuneracoesDTO[0]?this.resultado[0].remuneracoesDTO[0].rubricas:0;
       this.totalDescontos = this.descontos.reduce(function (soma,desconto,indice){
         console.log('soma',soma,'desconto',desconto.valor,'indice',indice)
         console.log('soma',typeof soma,'desconto',typeof desconto.valor,'indice',typeof indice)

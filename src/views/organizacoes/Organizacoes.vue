@@ -92,12 +92,12 @@ export default {
   methods:{
     async  buscaDadosServidorOrgao() {
       console.log('buscaDadosServidorOrgao')
-      let request = {
+      const request = {
         pagina: 1,
         orgaoServidorExercicio: this.organizacao.codigo,
       }
       console.log('request',request)
-      this.listaServidores =  await this.$store.dispatch("dashboard/serviceGetConsultaServidoresOrgaos", request);
+      this.listaServidores =  await this.$store.dispatch("dashboard/serviceGetConsultaServidoresByOrgaos", request);
       console.log('listaServidores',this.listaServidores)
     }
   }

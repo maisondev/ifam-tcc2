@@ -1,7 +1,7 @@
 <template>
-  <div class="flex w-full h-full bg-gray-800">
+  <div class="flex w-full h-max bg-gray-800">
     <aside class="w-64 h-full" aria-label="Sidebar">
-      <div class=" overflow-y-auto py-4 px-3 text-gray-50 rounded ">
+      <div class="overflow-y-auto py-4 px-3 text-gray-50 rounded ">
         <ul class="space-y-2 ">
           <li>
             <router-link to="/home" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-500 hover:opacity-95 dark:hover:bg-gray-700">
@@ -12,7 +12,19 @@
           <li>
             <router-link to="/servidores" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-500 hover:opacity-95 dark:hover:bg-gray-700">
               <svg class="w-6 h-6 text-gray-50 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"><path fill="currentColor" d="M19,19H5V5H19M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M16.5,16.25C16.5,14.75 13.5,14 12,14C10.5,14 7.5,14.75 7.5,16.25V17H16.5M12,12.25A2.25,2.25 0 0,0 14.25,10A2.25,2.25 0 0,0 12,7.75A2.25,2.25 0 0,0 9.75,10A2.25,2.25 0 0,0 12,12.25Z"></path></svg>
-              <span class="ml-4 text-left text-gray-50">Servidores</span>
+              <span class="ml-4 text-left text-gray-50">Servidores Federais</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/servidormunicipio" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-500 hover:opacity-95 dark:hover:bg-gray-700">
+              <svg class="w-6 h-6 text-gray-50 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"><path fill="currentColor" d="M19,19H5V5H19M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M16.5,16.25C16.5,14.75 13.5,14 12,14C10.5,14 7.5,14.75 7.5,16.25V17H16.5M12,12.25A2.25,2.25 0 0,0 14.25,10A2.25,2.25 0 0,0 12,7.75A2.25,2.25 0 0,0 9.75,10A2.25,2.25 0 0,0 12,12.25Z"></path></svg>
+              <span class="ml-4 text-left text-gray-50">Servidores Municipais</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/servidorestado" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-500 hover:opacity-95 dark:hover:bg-gray-700">
+              <svg class="w-6 h-6 text-gray-50 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"><path fill="currentColor" d="M19,19H5V5H19M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M16.5,16.25C16.5,14.75 13.5,14 12,14C10.5,14 7.5,14.75 7.5,16.25V17H16.5M12,12.25A2.25,2.25 0 0,0 14.25,10A2.25,2.25 0 0,0 12,7.75A2.25,2.25 0 0,0 9.75,10A2.25,2.25 0 0,0 12,12.25Z"></path></svg>
+              <span class="ml-4 text-left text-gray-50">Servidores Estado</span>
             </router-link>
           </li>
           <li>

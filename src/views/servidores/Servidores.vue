@@ -16,9 +16,6 @@
       </form>
     </div>
 
-    <div>
-      {{this.servidorEncontrado[0].servidor}}
-    </div>
 
   </div>
 </template>

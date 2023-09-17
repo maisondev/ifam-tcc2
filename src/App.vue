@@ -2,11 +2,11 @@
   <div id="app" class="flex flex-col ">
     <Header v-if="estaAutenticado" class="flex flex-row "> </Header>
     <div class="flex flex-row h-max">
-      <div v-if="estaAutenticado" class="flex flex-col h-screen">
+      <div v-if="estaAutenticado" class="flex flex-col h-auto">
         <MenuLateralEsquerdo class="h-full"></MenuLateralEsquerdo>
       </div>
-      <div class="flex flex-col overflow-x-auto">
-        <div class="w-auto">
+      <div class="flex flex-col overflow-x-auto w-full">
+        <div class="w-full">
           <router-view/>
         </div>
 

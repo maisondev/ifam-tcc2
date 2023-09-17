@@ -294,6 +294,15 @@ export default {
       this.servidorById = response;
       console.log("response 2",response);
       await this.getPesquisarFuncoesCargosController();
+      await this.getPesquisarServidorVinculosController();
+    },
+
+    async getPesquisarServidorVinculosController(){
+      console.log("getPesquisarServidorVinculosController",this.servidor);
+      const response = await this.$store.dispatch("dashboard/serviceGetConsultaVinculosServidores");
+      this.servidorById = response;
+      console.log("response 2",response);
+      await this.getPesquisarFuncoesCargosController();
     },
 
     async getPesquisarFuncoesCargosController(){
