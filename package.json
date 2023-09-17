@@ -8,6 +8,11 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@fortawesome/fontawesome-svg-core": "1.x",
+    "@fortawesome/free-regular-svg-icons": "5.x",
+    "@fortawesome/free-solid-svg-icons": "5.x",
+    "@fortawesome/vue-fontawesome": "^2.0.10",
     "autoprefixer": "9",
     "axios": "^0.26.1",
     "papaparse": "^5.4.1",

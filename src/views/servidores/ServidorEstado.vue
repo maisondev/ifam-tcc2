@@ -18,7 +18,6 @@
         <button @click="getConsultarServidorEstadoController" class="bg-blue-500 text-gray-50 px-4 py-2 rounded"><span>Consultar</span></button>
       </div>
     </div>
-
     <div>
       {{resultado}}
     </div>
@@ -26,84 +25,83 @@
 
 <!--      {{listaServidoresEstado}}-->
       <label>Filter by Name:</label>
-      <input class="form input" type="text" />
+      <input class="form input" type="text" v-model="filters.nome.value"/>
 <div v-if="dados">
 
 </div>
 
       <div v-if="parsed" class="relative overflow-x-auto shadow-md sm:rounded-lg p-8">
-        <v-client-table :data="dados" :columns="colunas" :options="options"/>
-<!--        <table class="relative overflow-x-auto shadow-md sm:rounded-lg p-8 w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-scroll">-->
-<!--          <thead slot="head">-->
-<!--          <tr class="bg-gray-700 text-gray-50">-->
-<!--            <th @click="sortNome" class="px-6 py-3">-->
-<!--              NOME-->
-<!--            </th>-->
+<!--        <v-client-table :data="dados" :columns="colunas" :options="options"/>-->
+        <v-table :data="dados"  :filters="filters"  :hideSortIcons="true" class="relative overflow-x-auto shadow-md sm:rounded-lg p-8 w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-scroll">
+          <thead slot="head">
+          <tr class="bg-gray-700 text-gray-50">
+            <v-th sortKey="nome" class="px-6 py-3">
+              NOME
+            </v-th>
+            <v-th sortKey="lotacao" class="px-6 py-3">
+              LOTACAO
+            </v-th>
+            <v-th sortKey="cargo" class="px-6 py-3">
+             CARGO
+            </v-th>
 <!--            <th class="px-6 py-3">-->
-<!--              LOTACAO-->
+<!--              FUNCAO-->
 <!--            </th>-->
-<!--            <th class="px-6 py-3">-->
-<!--             CARGO-->
-<!--            </th>-->
-<!--&lt;!&ndash;            <th class="px-6 py-3">&ndash;&gt;-->
-<!--&lt;!&ndash;              FUNCAO&ndash;&gt;-->
-<!--&lt;!&ndash;            </th>&ndash;&gt;-->
-<!--            <th class="px-6 py-3">-->
-<!--              VINCULO-->
-<!--            </th>-->
-<!--            <th @click="sortRemuneracao" class="px-6 py-3">-->
-<!--              REMUNERACAO LEGAL TOTAL(R$)-->
-<!--            </th>-->
-<!--            <th class="px-6 py-3">-->
-<!--              DESC.TETO(R$)-->
-<!--            </th>-->
-<!--            <th class="px-6 py-3">-->
-<!--              REMUNERACAO LEGAL DEVIDA(R$)-->
-<!--            </th>-->
-<!--            <th class="px-6 py-3">-->
-<!--              DESCONTOS LEGAIS(R$)-->
-<!--            </th>-->
-<!--            <th class="px-6 py-3">-->
-<!--              LIQUIDO DISPONIVEL(R$)-->
-<!--            </th>-->
-<!--          </tr>-->
-<!--          </thead>-->
-<!--          <tbody slot="body">-->
-<!--          <tr v-for="(servidor, indice) in dataSorted" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">-->
-
-<!--            <td class="px-6 py-3"  >-->
-<!--              {{servidor.NOME}}-->
-<!--            </td>-->
+            <v-th sortKey="vinculo" class="px-6 py-3">
+              VINCULO
+            </v-th>
+            <v-th sortKey="remuneracao legal total(r$)" class="px-6 py-3">
+              REMUNERACAO LEGAL TOTAL(R$)
+            </v-th>
+            <th class="px-6 py-3">
+              DESC.TETO(R$)
+            </th>
+            <v-th sortKey="remuneracao legal devida(r$)" class="px-6 py-3">
+              REMUNERACAO LEGAL DEVIDA(R$)
+            </v-th>
+            <v-th sortKey="descontos legais(r$)" class="px-6 py-3">
+              DESCONTOS LEGAIS(R$)
+            </v-th>
+            <v-th sortKey="liquido disponivel(r$)" class="px-6 py-3">
+              LIQUIDO DISPONIVEL(R$)
+            </v-th>
+          </tr>
+          </thead>
+          <tbody slot="body"  slot-scope="{displayData}">
+          <tr v-for="(servidor, indice) in displayData" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <td class="px-6 py-3"  >
+              {{ servidor.nome }}
+            </td>
+            <td class="px-6 py-3">
+              {{servidor.lotacao}}
+            </td>
+            <td class="px-6 py-3">
+              {{servidor.cargo}}
+            </td>
 <!--            <td class="px-6 py-3">-->
-<!--              {{servidor.LOTACAO}}-->
+<!--              {{servidor.FUNCAO}}-->
 <!--            </td>-->
-<!--            <td class="px-6 py-3">-->
-<!--              {{servidor.CARGO}}-->
-<!--            </td>-->
-<!--&lt;!&ndash;            <td class="px-6 py-3">&ndash;&gt;-->
-<!--&lt;!&ndash;              {{servidor.FUNCAO}}&ndash;&gt;-->
-<!--&lt;!&ndash;            </td>&ndash;&gt;-->
-<!--            <td class="px-6 py-3">-->
-<!--              {{servidor.VINCULO}}-->
-<!--            </td>-->
-<!--            <td class="px-6 py-3">-->
-<!--              {{servidor["REMUNERACAO LEGAL TOTAL(R$)"]}}-->
-<!--            </td>-->
-<!--            <td class="px-6 py-3">-->
-<!--              {{servidor["DESC.TETO(R$)"]}}-->
-<!--            </td>-->
-<!--            <td class="px-6 py-3">-->
-<!--              {{servidor[" REMUNERACAO LEGAL DEVIDA(R$)"]}}-->
-<!--            </td>-->
-<!--            <td class="px-6 py-3">-->
-<!--              {{servidor["DESCONTOS LEGAIS(R$)"]}}-->
-<!--            </td>-->
-<!--            <td class="px-6 py-3">-->
-<!--              {{servidor["LIQUIDO DISPONIVEL(R$)"]}}-->
-<!--            </td>-->
-<!--          </tr>-->
-<!--          </tbody>-->
-<!--        </table>-->
+            <td class="px-6 py-3">
+              {{servidor.vinculo}}
+            </td>
+            <td class="px-6 py-3">
+              {{servidor["remuneracao legal total(r$)"]}}
+            </td>
+            <td class="px-6 py-3">
+              {{servidor["desc.teto(r$)"]}}
+            </td>
+            <td class="px-6 py-3">
+              {{servidor["remuneracao legal devida(r$)"]}}
+            </td>
+            <td class="px-6 py-3">
+              {{servidor["descontos legais(r$)"]}}
+            </td>
+            <td class="px-6 py-3">
+              {{servidor["liquido disponivel(r$)"]}}
+            </td>
+          </tr>
+          </tbody>
+        </v-table>
       </div>
 
     </div>
@@ -120,6 +118,9 @@ export default {
   name: "ServidorEstado",
   data(){
     return {
+      filters: {
+        nome: { value: '', keys: ['nome'] }
+      },
       listaAnos:[2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023].reverse(),
       orgaos:[{"nome_orgao":"ADAF","id":"76"},{"nome_orgao":"ADS","id":"445"},{"nome_orgao":"APOSENTADOS - EXECUTIVO","id":"127"},{"nome_orgao":"APOSENTADOS – ALEAM","id":"10113"},{"nome_orgao":"APOSENTADOS – PGJ","id":"10108"},{"nome_orgao":"APOSENTADOS – TCE","id":"10106"},{"nome_orgao":"APOSENTADOS – TJA","id":"10110"},{"nome_orgao":"ARSEPAM","id":"93"},{"nome_orgao":"CASA CIVIL DO GOVERNO","id":"77"},{"nome_orgao":"CASA MILITAR","id":"94"},{"nome_orgao":"CB-CIVIS","id":"95"},{"nome_orgao":"CBMAM","id":"96"},{"nome_orgao":"CETAM","id":"74"},{"nome_orgao":"CGE","id":"75"},{"nome_orgao":"CSC","id":"97"},{"nome_orgao":"DETRAN","id":"98"},{"nome_orgao":"ERGSP","id":"99"},{"nome_orgao":"FAPEAM","id":"100"},{"nome_orgao":"FCECON","id":"101"},{"nome_orgao":"FEH","id":"86"},{"nome_orgao":"FEI","id":"396"},{"nome_orgao":"FHAJ","id":"102"},{"nome_orgao":"FHEMOAM","id":"103"},{"nome_orgao":"FMT-AM","id":"104"},{"nome_orgao":"FUHAM","id":"92"},{"nome_orgao":"FUNDAÇÃO AMAZONPREV","id":"87"},{"nome_orgao":"FUNDAÇÃO VILA OLIMPICA","id":"105"},{"nome_orgao":"FUNTEC","id":"106"},{"nome_orgao":"FVS","id":"17"},{"nome_orgao":"IDAM","id":"107"},{"nome_orgao":"IMPRENSA OFICIAL","id":"108"},{"nome_orgao":"IPAAM","id":"109"},{"nome_orgao":"IPEM-AM","id":"110"},{"nome_orgao":"JUCEA","id":"111"},{"nome_orgao":"OUVIDORIA GERAL","id":"112"},{"nome_orgao":"PENSIONISTAS - EXECUTIVO","id":"128"},{"nome_orgao":"PENSIONISTAS – ALEAM","id":"10112"},{"nome_orgao":"PENSIONISTAS – PGJ","id":"10107"},{"nome_orgao":"PENSIONISTAS – TCE","id":"10105"},{"nome_orgao":"PENSIONISTAS – TJA","id":"10109"},{"nome_orgao":"PGE","id":"80"},{"nome_orgao":"PM-ATIVOS","id":"113"},{"nome_orgao":"PM-CIVIS","id":"114"},{"nome_orgao":"POLICIA CIVIL","id":"115"},{"nome_orgao":"PROCON","id":"4573"},{"nome_orgao":"PRODAM","id":"136"},{"nome_orgao":"SEAD","id":"90"},{"nome_orgao":"SEAD-PENSÃO ESPECIAL I","id":"129"},{"nome_orgao":"SEAD-PENSÃO ESPECIAL II","id":"133"},{"nome_orgao":"SEAD-PENSÃO HANSENIANOS","id":"132"},{"nome_orgao":"SEAP","id":"73"},{"nome_orgao":"SEAS","id":"82"},{"nome_orgao":"SEC","id":"126"},{"nome_orgao":"SECOM","id":"72"},{"nome_orgao":"SECT","id":"122"},{"nome_orgao":"SEDECTI","id":"83"},{"nome_orgao":"SEDEL","id":"4572"},{"nome_orgao":"SEDUC","id":"91"},{"nome_orgao":"SEFAZ","id":"89"},{"nome_orgao":"SEIND","id":"22"},{"nome_orgao":"SEINFRA","id":"116"},{"nome_orgao":"SEJEL","id":"117"},{"nome_orgao":"SEJUSC","id":"84"},{"nome_orgao":"SEMA","id":"81"},{"nome_orgao":"SEPED","id":"118"},{"nome_orgao":"SEPROR","id":"119"},{"nome_orgao":"SERFI","id":"397"},{"nome_orgao":"SERGB","id":"79"},{"nome_orgao":"SES","id":"88"},{"nome_orgao":"SETRAB","id":"120"},{"nome_orgao":"SGVG","id":"78"},{"nome_orgao":"SNPH","id":"121"},{"nome_orgao":"SRMM","id":"71"},{"nome_orgao":"SSP","id":"123"},{"nome_orgao":"SUHAB","id":"124"},{"nome_orgao":"UEA","id":"125"},{"nome_orgao":"UGPE","id":"85"}],
       anoSelecionado: undefined,
@@ -202,10 +203,9 @@ export default {
             var newobj={}
             while (n--) {
               key = keys[n];
-              if(key.toLowerCase().includes("remunera") )
+              if(key.toLowerCase().includes("remunera") || key.toLowerCase().includes("desc") || key.toLowerCase().includes("liquid"))
                 newobj[key.toLowerCase().trim()]  = (parseFloat(new String(item[key]).replace(",",".")))
               else{
-
                 newobj[key.toLowerCase().trim()] = item[key];
               }
 
@@ -233,47 +233,25 @@ export default {
 
 
 <style scoped>
-.VuePagination {
+
+.vt-sort:before{
+  font-family: "Font Awesome 6 Free",sans-serif;
+  padding-right: 0.5em;
+  width: 1.28571429em;
+  display: inline-block;
   text-align: center;
 }
 
-.vue-title {
-  text-align: center;
-  margin-bottom: 10px;
+.vt-sortable:before{
+  content: "\f338";
 }
 
-.vue-pagination-ad {
-  text-align: center;
+.vt-asc:before{
+  content: "\f884";
 }
 
-.glyphicon.glyphicon-eye-open {
-  width: 16px;
-  display: block;
-  margin: 0 auto;
-}
+.vt-desc:before{
 
-th:nth-child(3) {
-  text-align: center;
-}
-
-.VueTables__child-row-toggler {
-  width: 16px;
-  height: 16px;
-  line-height: 16px;
-  display: block;
-  margin: auto;
-  text-align: center;
-}
-
-.VueTables__child-row-toggler--closed::before {
-  content: "+";
-}
-
-.VueTables__child-row-toggler--open::before {
-  content: "-";
-}
-
-[v-cloak] {
-  display:none;
+  content: "\f161";
 }
 </style>
