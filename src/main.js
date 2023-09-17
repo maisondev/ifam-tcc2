@@ -6,14 +6,12 @@ import './assets/tailwind.css'
 import './axios-auth'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
-import VuePapaParse from 'vue-papa-parse'
 import Papa from 'papaparse';
-import SmartTable from 'vuejs-smart-table'
+import {ServerTable, ClientTable, Event} from 'vue-tables-2-premium';
 
-Vue.use(SmartTable)
-
+Vue.use(ClientTable, []);
+Vue.use(ServerTable, []);
 Vue.use(Papa);
-Vue.use(VuePapaParse)
 
 Vue.component('v-select', vSelect)
 Vue.config.productionTip = false

@@ -24,81 +24,86 @@
     </div>
     <div >
 
+<!--      {{listaServidoresEstado}}-->
       <label>Filter by Name:</label>
-      <input class="form input" type="text" v-model="filters.NOME.value"/>
+      <input class="form input" type="text" />
+<div v-if="dados">
+
+</div>
 
       <div v-if="parsed" class="relative overflow-x-auto shadow-md sm:rounded-lg p-8">
-        <v-table :data="listaServidoresEstado.data" :filters="filters" class="relative overflow-x-auto shadow-md sm:rounded-lg p-8 w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-scroll">
-          <thead slot="head">
-          <tr class="bg-gray-700 text-gray-50">
-            <th class="px-6 py-3">
-              NOME
-            </th>
-            <th class="px-6 py-3">
-              LOTACAO
-            </th>
-            <th class="px-6 py-3">
-             CARGO
-            </th>
-<!--            <th class="px-6 py-3">-->
-<!--              FUNCAO-->
+        <v-client-table :data="dados" :columns="colunas" :options="options"/>
+<!--        <table class="relative overflow-x-auto shadow-md sm:rounded-lg p-8 w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-scroll">-->
+<!--          <thead slot="head">-->
+<!--          <tr class="bg-gray-700 text-gray-50">-->
+<!--            <th @click="sortNome" class="px-6 py-3">-->
+<!--              NOME-->
 <!--            </th>-->
-            <th class="px-6 py-3">
-              VINCULO
-            </th>
-            <v-th :customSort="ordenaRemuneracao" class="px-6 py-3">
-              REMUNERACAO LEGAL TOTAL(R$)
-            </v-th>
-            <th class="px-6 py-3">
-              DESC.TETO(R$)
-            </th>
-            <th class="px-6 py-3">
-              REMUNERACAO LEGAL DEVIDA(R$)
-            </th>
-            <th class="px-6 py-3">
-              DESCONTOS LEGAIS(R$)
-            </th>
-            <th class="px-6 py-3">
-              LIQUIDO DISPONIVEL(R$)
-            </th>
-          </tr>
-          </thead>
-          <tbody slot="body" slot-scope="{displayData}">
-          <tr v-for="(servidor, columnKey) in displayData" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+<!--            <th class="px-6 py-3">-->
+<!--              LOTACAO-->
+<!--            </th>-->
+<!--            <th class="px-6 py-3">-->
+<!--             CARGO-->
+<!--            </th>-->
+<!--&lt;!&ndash;            <th class="px-6 py-3">&ndash;&gt;-->
+<!--&lt;!&ndash;              FUNCAO&ndash;&gt;-->
+<!--&lt;!&ndash;            </th>&ndash;&gt;-->
+<!--            <th class="px-6 py-3">-->
+<!--              VINCULO-->
+<!--            </th>-->
+<!--            <th @click="sortRemuneracao" class="px-6 py-3">-->
+<!--              REMUNERACAO LEGAL TOTAL(R$)-->
+<!--            </th>-->
+<!--            <th class="px-6 py-3">-->
+<!--              DESC.TETO(R$)-->
+<!--            </th>-->
+<!--            <th class="px-6 py-3">-->
+<!--              REMUNERACAO LEGAL DEVIDA(R$)-->
+<!--            </th>-->
+<!--            <th class="px-6 py-3">-->
+<!--              DESCONTOS LEGAIS(R$)-->
+<!--            </th>-->
+<!--            <th class="px-6 py-3">-->
+<!--              LIQUIDO DISPONIVEL(R$)-->
+<!--            </th>-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody slot="body">-->
+<!--          <tr v-for="(servidor, indice) in dataSorted" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">-->
 
-            <td class="px-6 py-3"  >
-              {{servidor.NOME}}
-            </td>
-            <td class="px-6 py-3">
-              {{servidor.LOTACAO}}
-            </td>
-            <td class="px-6 py-3">
-              {{servidor.CARGO}}
-            </td>
-<!--            <td class="px-6 py-3">-->
-<!--              {{servidor.FUNCAO}}-->
+<!--            <td class="px-6 py-3"  >-->
+<!--              {{servidor.NOME}}-->
 <!--            </td>-->
-            <td class="px-6 py-3">
-              {{servidor.VINCULO}}
-            </td>
-            <td class="px-6 py-3">
-              {{servidor["REMUNERACAO LEGAL TOTAL(R$)"]}}
-            </td>
-            <td class="px-6 py-3">
-              {{servidor["DESC.TETO(R$)"]}}
-            </td>
-            <td class="px-6 py-3">
-              {{servidor[" REMUNERACAO LEGAL DEVIDA(R$)"]}}
-            </td>
-            <td class="px-6 py-3">
-              {{servidor["DESCONTOS LEGAIS(R$)"]}}
-            </td>
-            <td class="px-6 py-3">
-              {{servidor["LIQUIDO DISPONIVEL(R$)"]}}
-            </td>
-          </tr>
-          </tbody>
-        </v-table>
+<!--            <td class="px-6 py-3">-->
+<!--              {{servidor.LOTACAO}}-->
+<!--            </td>-->
+<!--            <td class="px-6 py-3">-->
+<!--              {{servidor.CARGO}}-->
+<!--            </td>-->
+<!--&lt;!&ndash;            <td class="px-6 py-3">&ndash;&gt;-->
+<!--&lt;!&ndash;              {{servidor.FUNCAO}}&ndash;&gt;-->
+<!--&lt;!&ndash;            </td>&ndash;&gt;-->
+<!--            <td class="px-6 py-3">-->
+<!--              {{servidor.VINCULO}}-->
+<!--            </td>-->
+<!--            <td class="px-6 py-3">-->
+<!--              {{servidor["REMUNERACAO LEGAL TOTAL(R$)"]}}-->
+<!--            </td>-->
+<!--            <td class="px-6 py-3">-->
+<!--              {{servidor["DESC.TETO(R$)"]}}-->
+<!--            </td>-->
+<!--            <td class="px-6 py-3">-->
+<!--              {{servidor[" REMUNERACAO LEGAL DEVIDA(R$)"]}}-->
+<!--            </td>-->
+<!--            <td class="px-6 py-3">-->
+<!--              {{servidor["DESCONTOS LEGAIS(R$)"]}}-->
+<!--            </td>-->
+<!--            <td class="px-6 py-3">-->
+<!--              {{servidor["LIQUIDO DISPONIVEL(R$)"]}}-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
       </div>
 
     </div>
@@ -123,18 +128,20 @@ export default {
       listaServidoresEstado:undefined,
       CSVTOJSON: undefined,
       parsed: undefined,
-      filters: {
-        NOME: { value: '', keys: ['NOME'] }
+      colunas: undefined,
+      dados: undefined,
+      options: {
+        editableColumns:['nome'],
+        sortable: ['nome', 'remuneracao legal total(r$)','descontos legais(r$)','liquido disponivel(r$)'],
+        filterable: ['nome', 'vinculo']
       }
+
     }
   },
+  computed:{
+  },
   methods:{
-    ordenaRemuneracao() {
-      this.listaServidoresEstado.datasort( function (x,y){
-        return x["REMUNERACAO LEGAL TOTAL(R$)"]-y["REMUNERACAO LEGAL TOTAL(R$)"];
-      });
 
-    },
     async getConsultarServidorEstadoController(){
       console.log("getConsultarServidorEstadoController");
       const request = {
@@ -147,38 +154,66 @@ export default {
       console.log("response",response);
       this.resultado = response[0].arquivos[1].url;
       console.log(this.resultado)
+      let self  = this;
       const config = {
         delimiter: "",	// auto-detect
-        newline: "",	// auto-detect
-        quoteChar: '"',
-        escapeChar: '"',
-        header: false,
-        transformHeader: undefined,
-        dynamicTyping: false,
-        preview: 0,
-        encoding: "",
-        worker: false,
-        comments: false,
-        step: undefined,
-        complete: undefined,
-        error: undefined,
-        download: false,
-        downloadRequestHeaders: undefined,
-        downloadRequestBody: undefined,
-        skipEmptyLines: false,
-        chunk: undefined,
-        chunkSize: undefined,
-        fastMode: undefined,
-        beforeFirstChunk: undefined,
-        withCredentials: undefined,
-        transform: undefined,
+            newline: "",	// auto-detect
+          quoteChar: '"',
+          escapeChar: '"',
+          header: false,
+          transformHeader: undefined,
+          dynamicTyping: false,
+          preview: 0,
+          encoding: "",
+          worker: false,
+          comments: false,
+          step: undefined,
+          complete: undefined,
+          error: undefined,
+          download: false,
+          downloadRequestHeaders: undefined,
+          downloadRequestBody: undefined,
+          skipEmptyLines: false,
+          chunk: undefined,
+          chunkSize: undefined,
+          fastMode: undefined,
+          beforeFirstChunk: undefined,
+          withCredentials: undefined,
+          transform: undefined,
+          delimitersToGuess: [',', '\t', '|', ';', Papa.RECORD_SEP, Papa.UNIT_SEP]
       }
-      let self  = this;
        Papa.parse(this.resultado, {
         download: true,
+         config,
         header: true,
         complete: (result) => {
           this.listaServidoresEstado = result;
+          console.log("header",this.listaServidoresEstado.meta.fields);
+          this.dados = this.listaServidoresEstado.data
+          console.log("dados capturados",this.dados, typeof this.dados);
+          console.table(this.dados)
+          this.colunas = this.listaServidoresEstado.meta.fields.map(item => {
+            return item.toLowerCase().trim();
+          })
+          this.dados = this.dados.map(item =>{
+            console.log("item",item,typeof item);
+            var key, keys = Object.keys(item);
+            var n = keys.length;
+            var newobj={}
+            while (n--) {
+              key = keys[n];
+              if(key.toLowerCase().includes("remunera") )
+                newobj[key.toLowerCase().trim()]  = (parseFloat(new String(item[key]).replace(",",".")))
+              else{
+
+                newobj[key.toLowerCase().trim()] = item[key];
+              }
+
+
+            }
+            return newobj;
+          })
+          console.log("dados",this.dados)
           this.parsed = true;
           console.log("teste dentro",this.CSVTOJSON);
           console.log(typeof this.CSVTOJSON);
@@ -198,5 +233,47 @@ export default {
 
 
 <style scoped>
+.VuePagination {
+  text-align: center;
+}
 
+.vue-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.vue-pagination-ad {
+  text-align: center;
+}
+
+.glyphicon.glyphicon-eye-open {
+  width: 16px;
+  display: block;
+  margin: 0 auto;
+}
+
+th:nth-child(3) {
+  text-align: center;
+}
+
+.VueTables__child-row-toggler {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.VueTables__child-row-toggler--closed::before {
+  content: "+";
+}
+
+.VueTables__child-row-toggler--open::before {
+  content: "-";
+}
+
+[v-cloak] {
+  display:none;
+}
 </style>
