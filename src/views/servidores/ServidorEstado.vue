@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mx-auto">
     <div class="container mx-auto">
       <h1>Servidores do Estado</h1>
     </div>
@@ -18,9 +18,6 @@
         <button @click="getConsultarServidorEstadoController" class="bg-blue-500 text-gray-50 px-4 py-2 rounded"><span>Consultar</span></button>
       </div>
     </div>
-    <div>
-      {{resultado}}
-    </div>
     <div >
 
 <!--      {{listaServidoresEstado}}-->
@@ -29,47 +26,56 @@
 <div v-if="dados">
 
 </div>
+<div class="container mx-auto flex justify-around p-8">
+  <smart-pagination class="" v-if="parsed"
+                    :currentPage.sync="currentPage"
+                    :totalPages="totalPages"
+  />
+
+</div>
+
 
       <div v-if="parsed" class="relative overflow-x-auto shadow-md sm:rounded-lg p-8">
 <!--        <v-client-table :data="dados" :columns="colunas" :options="options"/>-->
-        <v-table :data="dados"  :filters="filters"  :hideSortIcons="true" class="relative overflow-x-auto shadow-md sm:rounded-lg p-8 w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-scroll">
+        <v-table :currentPage.sync="currentPage"
+                 :pageSize="pageSize" :data="dados"  :filters="filters"   @totalPagesChanged="totalPages = $event" :hideSortIcons="true" class="relative overflow-x-auto shadow-md sm:rounded-lg p-8 w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-scroll">
           <thead slot="head">
           <tr class="bg-gray-700 text-gray-50">
-            <v-th sortKey="nome" class="px-6 py-3">
+            <v-th sortKey="nome" class="px-6 py-2">
               NOME
             </v-th>
-            <v-th sortKey="lotacao" class="px-6 py-3">
+            <v-th sortKey="lotacao" class="px-6 py-2">
               LOTACAO
             </v-th>
-            <v-th sortKey="cargo" class="px-6 py-3">
+            <v-th sortKey="cargo" class="px-6 py-2">
              CARGO
             </v-th>
 <!--            <th class="px-6 py-3">-->
 <!--              FUNCAO-->
 <!--            </th>-->
-            <v-th sortKey="vinculo" class="px-6 py-3">
+            <v-th sortKey="vinculo" class="px-6 py-2">
               VINCULO
             </v-th>
-            <v-th sortKey="remuneracao legal total(r$)" class="px-6 py-3">
-              REMUNERACAO LEGAL TOTAL(R$)
+            <v-th sortKey="remuneracao legal total(r$)" class="px-6 py-2">
+              REMUNERACAO LEGAL TOTAL
             </v-th>
-            <th class="px-6 py-3">
-              DESC.TETO(R$)
+            <th class="px-6 py-2">
+              DESC.TETO
             </th>
-            <v-th sortKey="remuneracao legal devida(r$)" class="px-6 py-3">
-              REMUNERACAO LEGAL DEVIDA(R$)
+            <v-th sortKey="remuneracao legal devida(r$)" class="px-6 py-2">
+              REMUNERACAO LEGAL DEVIDA
             </v-th>
-            <v-th sortKey="descontos legais(r$)" class="px-6 py-3">
-              DESCONTOS LEGAIS(R$)
+            <v-th sortKey="descontos legais(r$)" class="px-6 py-2">
+              DESCONTOS LEGAIS
             </v-th>
-            <v-th sortKey="liquido disponivel(r$)" class="px-6 py-3">
-              LIQUIDO DISPONIVEL(R$)
+            <v-th sortKey="liquido disponivel(r$)" class="px-6 py-2">
+              LIQUIDO DISPONIVEL
             </v-th>
           </tr>
           </thead>
           <tbody slot="body"  slot-scope="{displayData}">
           <tr v-for="(servidor, indice) in displayData" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <td class="px-6 py-3"  >
+            <td class="px-6 py-3 inline-flex w-max"  >
               {{ servidor.nome }}
             </td>
             <td class="px-6 py-3">
@@ -104,9 +110,14 @@
         </v-table>
       </div>
 
+      <div class="container mx-auto flex justify-around p-8">
+        <smart-pagination class="" v-if="parsed"
+                          :currentPage.sync="currentPage"
+                          :totalPages="totalPages"
+        />
+
+      </div>
     </div>
-
-
   </div>
 
 </template>
@@ -118,6 +129,9 @@ export default {
   name: "ServidorEstado",
   data(){
     return {
+      pageSize: 30,
+      currentPage: 1,
+      totalPages: 0,
       filters: {
         nome: { value: '', keys: ['nome'] }
       },
@@ -232,7 +246,28 @@ export default {
 
 
 
-<style scoped>
+<style>
+ul.pagination {
+  display: flex;
+  column-gap: 21px;
+}
+.page-item{
+  color: black;
+}
+.page-item a{
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+li.page-item.active {
+  background-color: #142d4c; /** Define uma cor de fundo para o botão da página atual **/
+  color: #ececec;
+  border-radius: 20%;
+}
+
+.a.page-link{
+  color: #ececec;
+}
 
 .vt-sort:before{
   font-family: "Font Awesome 6 Free",sans-serif;

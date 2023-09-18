@@ -1,15 +1,14 @@
 <template>
-  <div id="app" class="flex flex-col ">
-    <Header v-if="estaAutenticado" class="flex flex-row "> </Header>
-    <div class="flex flex-row h-max">
-      <div v-if="estaAutenticado" class="flex flex-col h-auto">
-        <MenuLateralEsquerdo class="h-full"></MenuLateralEsquerdo>
+  <div id="app" class="h-full">
+    <Header v-if="estaAutenticado" class=""> </Header>
+    <div class="flex flex-row h-full w-full">
+      <div v-if="estaAutenticado" class="">
+        <MenuLateralEsquerdo class=""></MenuLateralEsquerdo>
       </div>
-      <div class="flex flex-col overflow-x-auto w-full">
-        <div class="w-full">
+      <div class="flex flex-col  w-full overflow-y-auto">
+        <div class=" h-full my-20">
           <router-view/>
         </div>
-
       </div>
     </div>
     <Footer class="bottom-0 fixed" v-if="estaAutenticado"></Footer>
@@ -47,7 +46,9 @@ export default {
 </script>
 
 <style>
-
+body{
+  height: 100vh;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif, "Font Awesome 6 Free";
   -webkit-font-smoothing: antialiased;

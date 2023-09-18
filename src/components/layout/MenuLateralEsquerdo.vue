@@ -1,7 +1,7 @@
 <template>
-  <div class="flex w-full h-max bg-gray-800">
+  <div class="first-color sticky h-full top-0 left-0">
     <aside class="w-64 h-full" aria-label="Sidebar">
-      <div class="overflow-y-auto py-4 px-3 text-gray-50 rounded ">
+      <div class=" py-4 px-3 text-gray-50 rounded ">
         <ul class="space-y-2 ">
           <li>
             <router-link to="/home" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-500 hover:opacity-95 dark:hover:bg-gray-700">

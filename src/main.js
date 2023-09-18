@@ -13,6 +13,7 @@ import SmartTable from 'vuejs-smart-table'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import "@fortawesome/fontawesome-free/css/all.css"
 import "@fortawesome/fontawesome-free/js/all"
+import "@/assets/css/style.css"
 
 
 /* import font awesome icon component */

@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-around w-full items-center h-16 bg-blue-300">
-    <span>Footer</span>
+  <div class="flex justify-around w-full items-center h-16 third-color">
+    <span class="text-gray-50 uppercase">assine agora</span>
   </div>
 
 </template>
