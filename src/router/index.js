@@ -9,6 +9,7 @@ import Organizacoes from "../views/organizacoes/Organizacoes";
 import Servidores from "../views/servidores/Servidores"
 import ServidorMunicipio from "../views/servidores/ServidorMunicipio"
 import ServidorEstado from "../views/servidores/ServidorEstado.vue"
+import Assinatura from "../views/assinatura/Assinatura.vue"
 
 Vue.use(VueRouter)
 
@@ -57,6 +58,11 @@ const routes = [
         path: '/home',
         name: 'Home',
         component: Home
+    },
+    {
+        path: '/assinatura',
+        name: 'Assinatura',
+        component: Assinatura
     },
     {
         path: '/about',

@@ -222,6 +222,9 @@
     <div>
       <span>{{remuneracao}}</span>
     </div>
+    <div>
+      <Loading :visible="loading"></Loading>
+    </div>
   </div>
 
 
@@ -230,10 +233,10 @@
 
 <script>
 
-
+import Loading from "@/components/Loading.vue";
 export default {
   name: 'Home',
-  components: {},
+  components: {Loading},
   data() {
     return {
       cpf: undefined,
@@ -242,7 +245,8 @@ export default {
       servidor: undefined,
       cargo: undefined,
       cargosFuncoes: undefined,
-      remuneracao: undefined
+      remuneracao: undefined,
+      loading:undefined
 
     }
   },
@@ -254,17 +258,25 @@ export default {
         cpf: this.cpf
       }
       console.log("request",request);
-      this.resultado =  await this.$store.dispatch("dashboard/serviceGetConsultaPepsServidor", request);
-      this.servidor = this.resultado[0].servidor;
-      this.cargo=this.resultado[0].fichasCargoEfetivo[0];
-      localStorage.setItem("orgaoServidor",JSON.stringify(this.servidor.orgaoServidorExercicio));
-      console.log("resultado", this.resultado);
-      // let request2 = {
-      //   pagina:1,
-      //   id:this.resultado[0].servidor.idServidorAposentadoPensionista
-      // }
-      // this.responseServidorId = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresById",request2);
-      // console.log(resultadoId)
+      try{
+        this.loading=true;
+        this.resultado =  await this.$store.dispatch("dashboard/serviceGetConsultaPepsServidor", request);
+        this.servidor = this.resultado[0].servidor;
+        this.cargo=this.resultado[0].fichasCargoEfetivo[0];
+        localStorage.setItem("orgaoServidor",JSON.stringify(this.servidor.orgaoServidorExercicio));
+        console.log("resultado", this.resultado);
+        // let request2 = {
+        //   pagina:1,
+        //   id:this.resultado[0].servidor.idServidorAposentadoPensionista
+        // }
+        // this.responseServidorId = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresById",request2);
+        // console.log(resultadoId)
+      }catch (e) {
+
+      }finally {
+        this.loading=false;
+      }
+
     },
     async  getServidorController() {
       console.log("getServidorController")
@@ -273,15 +285,23 @@ export default {
         cpf: this.cpf,
         nome: this.nome
       }
-      console.log("request",request);
-      const response =  await this.$store.dispatch("dashboard/serviceGetConsultaServidores", request);
-      console.log("response",response)
-      this.servidor = response[0].servidor;
-      console.log("servidor",this.servidor);
-      this.cargo=response[0].fichasCargoEfetivo[0];
-      console.log("cargo",this.cargo);
-      localStorage.setItem("orgaoServidor",JSON.stringify(this.servidor.orgaoServidorExercicio));
-     await this.getPesquisarServidorByIdController();
+      try{
+        this.loading=true;
+        console.log("request",request);
+        const response =  await this.$store.dispatch("dashboard/serviceGetConsultaServidores", request);
+        console.log("response",response)
+        this.servidor = response[0].servidor;
+        console.log("servidor",this.servidor);
+        this.cargo=response[0].fichasCargoEfetivo[0];
+        console.log("cargo",this.cargo);
+        localStorage.setItem("orgaoServidor",JSON.stringify(this.servidor.orgaoServidorExercicio));
+        await this.getPesquisarServidorByIdController();
+      } catch (e) {
+        console.log(e)
+      } finally {
+        this.loading=false;
+      }
+
     },
 
     async getPesquisarServidorByIdController(){
@@ -289,20 +309,36 @@ export default {
       const request = {
         id: this.servidor.idServidorAposentadoPensionista,
       }
-      console.log("request",request);
-      const response = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresById",request);
-      this.servidorById = response;
-      console.log("response 2",response);
-      await this.getPesquisarFuncoesCargosController();
-      await this.getPesquisarServidorVinculosController();
+      try{
+        this.loading=true;
+        console.log("request",request);
+        const response = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresById",request);
+        this.servidorById = response;
+        console.log("response 2",response);
+        await this.getPesquisarFuncoesCargosController();
+        await this.getPesquisarServidorVinculosController();
+      }catch (e) {
+
+      }finally {
+        this.loading=false;
+      }
+
     },
 
     async getPesquisarServidorVinculosController(){
       console.log("getPesquisarServidorVinculosController",this.servidor);
-      const response = await this.$store.dispatch("dashboard/serviceGetConsultaVinculosServidores");
-      this.servidorById = response;
-      console.log("response 2",response);
-      await this.getPesquisarFuncoesCargosController();
+      try{
+        this.loading=true;
+        const response = await this.$store.dispatch("dashboard/serviceGetConsultaVinculosServidores");
+        this.servidorById = response;
+        console.log("response 2",response);
+        await this.getPesquisarFuncoesCargosController();
+      }catch (e) {
+
+      }finally {
+        this.loading=false;
+      }
+
     },
 
     async getPesquisarFuncoesCargosController(){
@@ -310,11 +346,19 @@ export default {
       const request = {
         pagina: 20,
       }
-      console.log("request",request);
-      const response = await this.$store.dispatch("dashboard/serviceGetConsultaFuncoesCargos",request);
-      this.cargosFuncoes = response;
-      console.log("response 3",response);
-      await this.getPesquisarServidoresByOrgaosController();
+      try{
+        this.loading=true;
+        console.log("request",request);
+        const response = await this.$store.dispatch("dashboard/serviceGetConsultaFuncoesCargos",request);
+        this.cargosFuncoes = response;
+        console.log("response 3",response);
+        await this.getPesquisarServidoresByOrgaosController();
+      }catch (e) {
+
+      }finally {
+        this.loading=false;
+      }
+
     },
 
     async getPesquisarServidoresByOrgaosController(){
@@ -326,11 +370,19 @@ export default {
         orgaoLotacao: this.servidor.orgaoServidorLotacao.codigo,
         tipoServidor: this.servidor.tipoServidor == "Civil" ? 1:2,
       }
-      console.log("request",request);
-      const response = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresByOrgaos",request);
-      this.cargosFuncoes = response;
-      console.log("response 4",response);
-      this.getRemuneracaoServidorController();
+      try {
+        this.loading=true;
+        console.log("request",request);
+        const response = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresByOrgaos",request);
+        this.cargosFuncoes = response;
+        console.log("response 4",response);
+        await this.getRemuneracaoServidorController();
+      }catch (e) {
+
+      }finally {
+        this.loading=false;
+      }
+
     },
 
     async  getRemuneracaoServidorController() {

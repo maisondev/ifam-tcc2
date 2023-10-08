@@ -4,7 +4,7 @@
         <div class="w-full h-full border-r-2 ">
           <div class="w-full h-full my-4">
             <h1 class="text-blue-600 font-semibold text-center text-lg my-8">Login</h1>
-            <p class="font-bold my-4">Tenha todos os seus dados de remuneração em um único lugar.</p>
+            <p class="font-bold my-4">Tenha todos os seus dados de remuneração de servidores públicos em um único lugar.</p>
           </div>
           <div class="relative flex py-5 items-center my-4">
             <div class="flex-grow border-t border-gray-400"></div>
@@ -59,14 +59,14 @@
 
           </div>
           <div class="my-4">
-            <h2 class="text-gray-50 text-xl font-semibold my-8">Obtenha informações relevantes sobre seus dados de remuneração</h2>
+            <h2 class="text-gray-50 text-xl font-semibold my-8">Obtenha informações relevantes sobre os dados de remuneração de servidores públicos.</h2>
           </div>
           <div class="my-4">
-            <h2 class="text-gray-50 text-base font-medium my-4">Gráficos, insights, comparativos salariais e muito mais</h2>
+            <h2 class="text-gray-50 text-base font-medium my-4">Gráficos, insights, comparativos salariais e muito mais.</h2>
           </div>
           <footer class="sticky bottom-auto my-8">
-            <p class="text-gray-50 my-4">Planos apartir de R$ 5,99</p>
-            <p class="text-gray-50 my-4">Assine agora</p>
+            <p class="text-gray-50 my-4">Planos apartir de R$ 3,99</p>
+            <BaseButton rotulo="Assine Agora" @action="getAssinatura"></BaseButton>
           </footer>
         </div>
 
@@ -78,8 +78,11 @@
 </template>
 
 <script>
+import BaseButton from "@/components/base/BaseButton.vue";
+
 export default {
   name: "Login",
+  components: {BaseButton},
   data(){
     return{
 
@@ -89,6 +92,10 @@ export default {
     async entrarNaAplicacao(){
       await this.$store.commit('setAutenticado',true)
       await this.$router.push("home");
+    },
+    getAssinatura(){
+      console.log("getAssinatura");
+      this.$router.push("/assinatura");
     }
   }
 }
