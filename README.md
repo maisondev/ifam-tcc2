@@ -1,19 +1,19 @@
-# ifam-tcc2
+# Trabalho de Conclusão de Curso II
 
-## Project setup
+## Sistema Web que utiliza os dados abertos dos servidores públicos.
+
+> Instalar as dependências do projeto.
+> ```
+> yarn install
+> ```
+
+
+### Levantar o servidor
 ```
-yarn install
+yarn dev
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
+### Compilar e jogar pra produção
 ```
 yarn build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
