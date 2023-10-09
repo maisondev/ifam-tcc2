@@ -1,12 +1,19 @@
 <script>
+import BaseButton from "@/components/base/BaseButton.vue";
+
 export default {
-  name: "Assinatura"
+  name: "Assinatura",
+  components: {BaseButton}
 }
 </script>
 
 <template>
-<div>
-  <h1>Assinatura</h1>
+<div class="bg-blue-500 rounded h-full">
+  <h1 class="text-gray-50 text-2xl p-4">Assinatura</h1>
+  <div class="p-4">
+    <BaseButton rotulo="Assinar"></BaseButton>
+  </div>
+
 </div>
 </template>
 
