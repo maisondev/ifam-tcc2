@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="container mx-auto my-auto">
-      <h1>Trabalho de conclusão de curso II</h1>
+      <h1>Trabalho de Conclusão de Curso II</h1>
       <h2>Aluno: Maison Marcel Madri Galvão dos Santos Souza</h2>
     </div>
   </div>

@@ -5,6 +5,10 @@ export default {
     rotulo:{
       type:String,
       required: true
+    },
+    corBotao:{
+      type:String,
+      required: false
     }
   },
   methods:{
@@ -18,7 +22,7 @@ export default {
 
 <template>
   <div>
-    <button class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded" @click.prevent="action"><span class="text-gray-50">{{ rotulo }}</span></button>
+    <button :class="corBotao" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded" @click.prevent="action"><span class="text-gray-50">{{ rotulo }}</span></button>
   </div>
 </template>
 

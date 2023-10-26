@@ -37,6 +37,7 @@
 <script>
 
 import Loading from "@/components/Loading.vue";
+import firebase from "firebase/compat";
 export default {
   name: 'Servidores',
   components: {Loading},
@@ -46,6 +47,12 @@ export default {
       nomeServidor: undefined,
       servidorEncontrado: undefined,
       loading: undefined
+    }
+  },
+
+  computed:{
+    estaAutenticado(){
+      return firebase.auth().currentUser;
     }
   },
   methods: {

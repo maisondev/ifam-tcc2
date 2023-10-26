@@ -14,22 +14,26 @@
             <form>
               <div class="text-center mx-auto">
                 <div class="mb-6 mx-10">
-                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 text-left font-bold">Email</label>
-                  <input type="email" id="email" class="form-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
+                  <label for="email" class="block mb-2 text-sm text-gray-900 dark:text-gray-300 text-left font-bold">Email</label>
+                  <input v-model="email" type="email" id="email" class="form-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required="">
                 </div>
                 <div class="mb-6 mx-10">
-                  <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 text-left font-bold">Senha</label>
-                  <input type="password" id="password" class="form-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                  <label for="password" class="block mb-2 text-sm text-gray-900 dark:text-gray-300 text-left font-bold">Senha</label>
+                  <input v-model="senha" type="password" id="password" class="form-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
                 </div>
                 <div class="flex items-start mb-6 mx-10">
                   <div class="flex items-center h-5">
-                    <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required="">
+                    <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800">
                   </div>
                   <div class="ml-3 text-sm">
                     <label for="remember" class="font-medium text-gray-900 dark:text-gray-300">Manter conectado</label>
                   </div>
                 </div>
-                <button @click="entrarNaAplicacao" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar</button>
+                <div class="flex justify-around">
+                  <button @click.prevent="getLoginController" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar</button>
+                  <BaseButton rotulo="Cadastrar" @action="getFormCadastro" ></BaseButton>
+                </div>
+
               </div>
 
             </form>
@@ -79,23 +83,50 @@
 
 <script>
 import BaseButton from "@/components/base/BaseButton.vue";
-
+import firebase from "firebase/compat/app";
 export default {
   name: "Login",
   components: {BaseButton},
   data(){
     return{
-
+      email: undefined,
+      senha: undefined
     }
   },
   methods:{
-    async entrarNaAplicacao(){
-      await this.$store.commit('setAutenticado',true)
-      await this.$router.push("home");
+    async getLoginController() {
+      console.log("getLoginController");
+      const request ={
+        email: this.email,
+        senha: this.senha
+      }
+      console.log(request);
+         firebase.auth().signInWithEmailAndPassword(request.email, request.senha)
+            .then((userCredential) => {
+              // Signed in
+              var user = userCredential.user;
+              console.log("user", user);
+             this.$store.commit("login/setUsuario",userCredential)
+              this.$router.push({name: "Home"})
+
+            })
+            .catch((error) => {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              console.log("Erro ao fazer login",errorCode,errorMessage);
+              alert(errorMessage)
+            });
+
+
     },
+
     getAssinatura(){
       console.log("getAssinatura");
       this.$router.push("/assinatura");
+    },
+    getFormCadastro(){
+      console.log("getFormCadastro");
+      this.$router.push({name:"cadastro"});
     }
   }
 }

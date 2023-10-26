@@ -11,14 +11,30 @@ import Servidores from "../views/servidores/Servidores"
 import ServidorMunicipio from "../views/servidores/ServidorMunicipio"
 import ServidorEstado from "../views/servidores/ServidorEstado.vue"
 import Assinatura from "../views/assinatura/Assinatura.vue"
+import Cadastro from "../views/login/Cadastro.vue"
+import App from "../App.vue";
 
 Vue.use(VueRouter)
 
 const routes = [
     {
         path: '/',
-        name: 'login',
+        redirect: '/login',
+    },
+    {
+        path: '/principal',
+        name: 'Principal',
+        component: App
+    },
+    {
+        path: '/login',
+        name: 'Login',
         component: Login
+    },
+    {
+        path: '/cadastro',
+        name: 'cadastro',
+        component: Cadastro
     },
     {
         path: '/servidores',

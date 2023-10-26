@@ -9,11 +9,28 @@ import 'vue-select/dist/vue-select.css';
 import Papa from 'papaparse';
 import {ServerTable, ClientTable, Event} from 'vue-tables-2-premium';
 import SmartTable from 'vuejs-smart-table'
-/* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 import "@fortawesome/fontawesome-free/css/all.css"
 import "@fortawesome/fontawesome-free/js/all"
 import "@/assets/css/style.css"
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+
+
+const firebaseConfig = {
+  apiKey: process.env.VUE_APP_FIREBASE1,
+  authDomain: process.env.FIREBASE2,
+  projectId: process.env.FIREBASE3,
+  storageBucket: process.env.FIREBASE4,
+  messagingSenderId: process.env.FIREBASE5,
+  appId: process.env.FIREBASE6,
+  measurementId: process.env.FIREBASE7
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+console.log("auth",auth)
 
 
 /* import font awesome icon component */
@@ -40,6 +57,7 @@ Vue.component('v-select', vSelect)
 Vue.config.productionTip = false
 
 new Vue({
+  firebase,
   router,
   store,
   render: function (h) { return h(App) }

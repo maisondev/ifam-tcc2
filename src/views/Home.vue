@@ -234,9 +234,11 @@
 <script>
 
 import Loading from "@/components/Loading.vue";
+import firebase from "firebase/compat";
 export default {
   name: 'Home',
   components: {Loading},
+
   data() {
     return {
       cpf: undefined,
@@ -248,6 +250,11 @@ export default {
       remuneracao: undefined,
       loading:undefined
 
+    }
+  },
+  computed:{
+    estaAutenticado(){
+      return firebase.auth().currentUser;
     }
   },
 

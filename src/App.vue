@@ -1,17 +1,17 @@
 <template>
-  <div id="app" class="h-full">
+  <div  class="h-full">
     <Header v-if="estaAutenticado" class=""> </Header>
     <div class="flex flex-row h-full w-full">
-      <div v-if="estaAutenticado" class="">
-        <MenuLateralEsquerdo class=""></MenuLateralEsquerdo>
+      <div class="">
+        <MenuLateralEsquerdo v-if="estaAutenticado" class=""></MenuLateralEsquerdo>
       </div>
       <div class="flex flex-col  w-full overflow-y-auto">
-        <div class="h-full">
+        <div id="app" class="h-full">
           <router-view/>
         </div>
       </div>
     </div>
-    <Footer class="bottom-0 fixed" v-if="estaAutenticado"></Footer>
+    <Footer v-if="estaAutenticado" class="bottom-0 fixed" ></Footer>
   </div>
 </template>
 
@@ -20,6 +20,7 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import MenuLateralEsquerdo from "@/components/layout/MenuLateralEsquerdo";
+import firebase from "firebase/compat/app";
 
 export default {
   name:'App',
@@ -34,11 +35,18 @@ export default {
     }
   },
   created() {
-    this.$store.commit('setAutenticado',false)
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log("user logado",user)
+        // ...
+      } else {
+        console.log("Deslogado")
+      }
+    });
   },
   computed:{
     estaAutenticado(){
-      return this.$store.getters.autenticado;
+      return this.$store.getters["login/getUsuario"]
     }
   }
 }
