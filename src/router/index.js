@@ -5,6 +5,7 @@ import Home from "../views/Home";
 import DashBoard from "../views/dashboard/DashBoard";
 import Rendimentos from "../views/rendimentos/Rendimentos";
 import Perfil from "../views/perfil/Perfil";
+import Sobre from "../views/perfil/About.vue";
 import Organizacoes from "../views/organizacoes/Organizacoes";
 import Servidores from "../views/servidores/Servidores"
 import ServidorMunicipio from "../views/servidores/ServidorMunicipio"
@@ -67,12 +68,7 @@ const routes = [
     {
         path: '/about',
         name: 'About',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: function () {
-            return import(/* webpackChunkName: "about" */ '../views/About.vue')
-        }
+        component: Sobre
     }
 ]
 

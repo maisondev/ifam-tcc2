@@ -6,7 +6,7 @@
         <MenuLateralEsquerdo class=""></MenuLateralEsquerdo>
       </div>
       <div class="flex flex-col  w-full overflow-y-auto">
-        <div class=" h-full my-20">
+        <div class="h-full">
           <router-view/>
         </div>
       </div>
