@@ -59,10 +59,12 @@ export default {
           .then((userCredential) => {
             // Signed in
             var user = userCredential.user;
+            alert("Usuário Cadastrado com sucesso")
             this.$router.push({name:"Login"})
           })
           .catch((error) => {
             console.log(error.code,error.message);
+            alert(error.code,error.message)
           });
     }
   }
