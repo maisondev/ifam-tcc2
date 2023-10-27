@@ -19,12 +19,12 @@ import "firebase/compat/auth";
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE1,
-  authDomain: process.env.FIREBASE2,
-  projectId: process.env.FIREBASE3,
-  storageBucket: process.env.FIREBASE4,
-  messagingSenderId: process.env.FIREBASE5,
-  appId: process.env.FIREBASE6,
-  measurementId: process.env.FIREBASE7
+  authDomain: process.env.VUE_APP_FIREBASE2,
+  projectId: process.env.VUE_APP_FIREBASE3,
+  storageBucket: process.env.VUE_APP_FIREBASE4,
+  messagingSenderId: process.env.VUE_APP_FIREBASE5,
+  appId: process.env.VUE_APP_FIREBASE6,
+  measurementId: process.env.VUE_APP_FIREBASE7
 };
 
 // Initialize Firebase
