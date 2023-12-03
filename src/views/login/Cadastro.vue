@@ -1,12 +1,12 @@
 <template>
   <div class="container mx-auto bg-green-700 rounded h-1/2 my-24">
     <h1 class="text-gray-50 text-2xl uppercase py-16">Cadastro</h1>
-    <form class="container mx-auto px-48">
+    <form class="container mx-auto lg:px-40">
       <div class="text-center">
         <div class="mb-6 mx-10">
           <label for="email" class="block mb-2 text-sm font-medium text-gray-50 dark:text-gray-300 text-left font-bold placeholder-blue-700">Email</label>
           <input v-model="email" type="email" id="email"
-                 class="form-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                 class="form-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                  placeholder="Escreva seu melhor email" required>
         </div>
         <div class="mb-6 mx-10">
@@ -17,14 +17,6 @@
                  required>
         </div>
         <div class="flex items-start mb-6 mx-10">
-          <div class="flex items-center h-5">
-            <input id="remember" aria-describedby="remember" type="checkbox"
-                   class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                   required="">
-          </div>
-          <div class="ml-3 text-sm">
-            <label for="remember" class="font-medium text-gray-50 dark:text-gray-300">Manter conectado</label>
-          </div>
         </div>
         <div class="flex justify-around">
           <BaseButton rotulo="Cadastrar" @action="getCadastroController"
