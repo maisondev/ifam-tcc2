@@ -1,5 +1,6 @@
 <template>
   <div class="px-4 w-full my-4 h-full">
+
     <form class="flex flex-wrap justify-around w-full" @submit.prevent="getServidorController">
       <div class="block">
         <label class="block text-gray-800 font-bold text-left" for="CPF">CPF:</label>
@@ -234,7 +235,20 @@
 <script>
 
 import Loading from "@/components/Loading.vue";
-import firebase from "firebase/compat";
+import firebase from "firebase/app";
+import {
+  initAccordions,
+  initCarousels,
+  initCollapses,
+  initDials,
+  initDismisses,
+  initDrawers,
+  initDropdowns,
+  initModals,
+  initPopovers,
+  initTabs,
+  initTooltips } from 'flowbite'
+
 export default {
   name: 'Home',
   components: {Loading},
@@ -251,6 +265,19 @@ export default {
       loading:undefined
 
     }
+  },
+  mounted() {
+    initAccordions();
+    initCarousels();
+    initCollapses();
+    initDials();
+    initDismisses();
+    initDrawers();
+    initDropdowns();
+    initModals();
+    initPopovers();
+    initTabs();
+    initTooltips();
   },
   computed:{
     estaAutenticado(){

@@ -13,13 +13,11 @@
     "@fortawesome/free-regular-svg-icons": "5.x",
     "@fortawesome/free-solid-svg-icons": "5.x",
     "@fortawesome/vue-fontawesome": "^2.0.10",
-    "autoprefixer": "9",
     "axios": "^0.26.1",
     "firebase": "^10.5.0",
+    "flowbite": "^2.0.0",
     "papaparse": "^5.4.1",
-    "postcss": "8",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "vue": "^2.6.11",
+    "vue": "2.7.15",
     "vue-easytable": "^2.27.1",
     "vue-papa-parse": "^3.1.0",
     "vue-router": "^3.2.0",
@@ -32,8 +30,10 @@
     "@tailwindcss/forms": "^0.5.0",
     "@vue/cli-plugin-router": "~4.5.15",
     "@vue/cli-plugin-vuex": "~4.5.15",
-    "@vue/cli-service": "~4.5.15",
-    "vue-template-compiler": "^2.6.11"
+    "@vue/cli-service": "^5.0.8",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.3.5"
   },
   "browserslist": [
     "> 1%",

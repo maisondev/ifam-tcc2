@@ -24,26 +24,29 @@ export const actions = {
         }
 
     },
+
+    // Trecho de código que consome a API REST do Governo do Estado do Amazonas.
     async serviceGetConsultaServidorEstado(context, request) {
-        console.log('serviceGetConsultaServidorEstado',request)
         const url = "wp-admin/admin-ajax.php";
+        //Passagem de parâmentros por Body params conforme especificação da API
         const params = new URLSearchParams();
         params.append('action', 'get_meses_docs');
         params.append('ano', request.ano);
         params.append('orgao_id', request.orgao_id);
         try{
+            //Uso da biblioteca axios que faz parte do ecossistema do VUEjs
             return await axiosEstado.post(url, params)
                 .then(function (response) {
-                    console.log('response', response);
+                    //Retorno do response
                     return response.data;
                 })
                 .catch(function (error) {
                     console.log('Erro', error)
                 });
         }catch (e) {
+            // Tratamento de erro.
             console.log('Erro ao consultar peps',e)
         }
-
     },
 
     async serviceGetConsultaServidorMunicipio(context, request) {
@@ -90,7 +93,7 @@ export const actions = {
              return await axios.get(url, {params: {pagina:request.pagina,
                  cpf:request.cpf, nome: request.nome}})
                 .then(function (response) {
-                    console.log('response', response.data);
+                    console.log('response then', response.data);
                     return response.data;
                 })
                 .catch(function (error) {
@@ -173,7 +176,7 @@ export const actions = {
                     tipoServidor: request.tipoServidor,
                     tipoVinculo: request.tipoVinculo}})
                 .then(function (response) {
-                    console.log('response', response);
+                    console.log('response', response.data);
                     return response.data;
                 })
                 .catch(function (error) {

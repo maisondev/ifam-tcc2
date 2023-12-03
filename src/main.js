@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './assets/tailwind.css'
+import './assets/css/tailwind.css'
 import './axios-auth'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
@@ -15,6 +15,9 @@ import "@fortawesome/fontawesome-free/js/all"
 import "@/assets/css/style.css"
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import 'flowbite';
+import 'flowbite/dist/flowbite.min.js'
+import 'flowbite/dist/datepicker.min'
 
 
 const firebaseConfig = {

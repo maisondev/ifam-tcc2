@@ -1,3 +1,9 @@
+<template>
+  <div>
+    <button :class="corBotao" class="xs:container xs:mx-auto bg-green-600 hover:bg-green-700 px-8 py-2 rounded" @click.prevent="action"><span class="text-gray-50 text-lg">{{ rotulo }}</span></button>
+  </div>
+</template>
+
 <script>
 export default {
   name: "BaseButton",
@@ -20,11 +26,7 @@ export default {
 }
 </script>
 
-<template>
-  <div>
-    <button :class="corBotao" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded" @click.prevent="action"><span class="text-gray-50">{{ rotulo }}</span></button>
-  </div>
-</template>
+
 
 <style scoped>
 

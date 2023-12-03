@@ -84,8 +84,8 @@ import firebase from "firebase/compat/app";
 export default {
   name: "MenuLateralEsquerdo",
   methods:{
-    logout(){
-      firebase.auth().signOut().then(() => {
+    async logout(){
+      await firebase.auth().signOut().then(() => {
         this.$store.commit("login/setUsuario",null);
         this.$router.push("/");
       }).catch((error) => {

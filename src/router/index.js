@@ -13,6 +13,8 @@ import ServidorEstado from "../views/servidores/ServidorEstado.vue"
 import Assinatura from "../views/assinatura/Assinatura.vue"
 import Cadastro from "../views/login/Cadastro.vue"
 import App from "../App.vue";
+import EsqueciSenha from "../views/login/EsqueciSenha.vue";
+import NovaSenha from "@/views/login/NovaSenha.vue";
 
 Vue.use(VueRouter)
 
@@ -35,6 +37,16 @@ const routes = [
         path: '/cadastro',
         name: 'cadastro',
         component: Cadastro
+    },
+    {
+        path: '/esquecisenha',
+        name: 'EsqueciSenha',
+        component: EsqueciSenha
+    },
+    {
+        path: '/novasenha',
+        name: 'NovaSenha',
+        component: NovaSenha
     },
     {
         path: '/servidores',

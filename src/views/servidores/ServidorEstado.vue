@@ -260,7 +260,7 @@ export default {
   methods: {
 
     async getConsultarServidorEstadoController() {
-      console.log("getConsultarServidorEstadoController");
+     // Parametros necessários para a consulta na API.
       const request = {
         action: "get_meses_docs",
         ano: this.anoSelecionado,

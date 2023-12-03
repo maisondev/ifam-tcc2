@@ -37,7 +37,7 @@
 <script>
 
 import Loading from "@/components/Loading.vue";
-import firebase from "firebase/compat";
+import firebase from "firebase/app";
 export default {
   name: 'Servidores',
   components: {Loading},
@@ -45,8 +45,8 @@ export default {
     return {
       cpf: undefined,
       nomeServidor: undefined,
-      servidorEncontrado: undefined,
-      loading: undefined
+      loading: undefined,
+      servidor: undefined,
     }
   },
 
@@ -67,8 +67,8 @@ export default {
       try {
         this.loading = true;
         const response = await this.$store.dispatch("dashboard/serviceGetConsultaServidores", request);
-        this.servidorEncontrado = response;
-        console.log("response 1", response)
+        this.servidor = response[0].servidor;
+        console.log("servidor", this.servidor)
         await this.getPesquisarServidorByIdController();
       } catch (e) {
         console.log(e)
@@ -76,6 +76,112 @@ export default {
         this.loading = false;
       }
     },
+
+    async getPesquisarServidorByIdController(){
+      console.log("getPesquisarServidorByIdController",this.servidor);
+      const request = {
+        id: this.servidor.idServidorAposentadoPensionista,
+      }
+      console.log("request",request)
+      try{
+        this.loading=true;
+        console.log("request",request);
+        const response = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresById",request);
+        this.servidorById = response;
+        console.log("response 2",response);
+        await this.getPesquisarFuncoesCargosController();
+        await this.getPesquisarServidorVinculosController();
+      }catch (e) {
+
+      }finally {
+        this.loading=false;
+      }
+
+    },
+
+    async getPesquisarFuncoesCargosController(){
+      console.log("getPesquisarFuncoesCargosController");
+      const request = {
+        pagina: 20,
+      }
+      try{
+        this.loading=true;
+        console.log("request",request);
+        const response = await this.$store.dispatch("dashboard/serviceGetConsultaFuncoesCargos",request);
+        this.cargosFuncoes = response;
+        console.log("response 3",response);
+        await this.getPesquisarServidoresByOrgaosController();
+      }catch (e) {
+
+      }finally {
+        this.loading=false;
+      }
+
+    },
+
+    async getPesquisarServidorVinculosController(){
+      console.log("getPesquisarServidorVinculosController",this.servidor);
+      try{
+        this.loading=true;
+        const response = await this.$store.dispatch("dashboard/serviceGetConsultaVinculosServidores");
+        this.servidorById = response;
+        console.log("response 2",response);
+        await this.getPesquisarFuncoesCargosController();
+      }catch (e) {
+
+      }finally {
+        this.loading=false;
+      }
+
+    },
+
+    async getPesquisarServidoresByOrgaosController(){
+      console.log("getPesquisarServidoresByOrgaosController",this.servidor);
+      const request = {
+        pagina: 1,
+        licenca: 0,
+        orgaoExercicio: this.servidor.orgaoServidorExercicio.codigo,
+        orgaoLotacao: this.servidor.orgaoServidorLotacao.codigo,
+        tipoServidor: this.servidor.tipoServidor == "Civil" ? 1:2,
+      }
+      try {
+        this.loading=true;
+        console.log("request",request);
+        const response = await this.$store.dispatch("dashboard/serviceGetConsultaServidoresByOrgaos",request);
+        this.cargosFuncoes = response;
+        console.log("response 4",response);
+        await this.getRemuneracaoServidorController();
+      }catch (e) {
+
+      }finally {
+        this.loading=false;
+      }
+
+    },
+
+    async  getRemuneracaoServidorController() {
+      console.log("getRemuneracaoServidorController");
+      const request = {
+        cpf: this.cpf,
+        id: this.servidor.idServidorAposentadoPensionista?this.servidor.idServidorAposentadoPensionista: undefined,
+        mesAno:202307,
+        pagina: 1,
+      }
+      console.log('request',request)
+      this.remuneracao =  await this.$store.dispatch("dashboard/serviceGetConsultaRemuneracoesServidor", request);
+      this.remuneracao = this.resultado[0].remuneracoesDTO[0];
+      this.descontos = this.resultado[0].remuneracoesDTO[0].rubricas;
+      this.totalDescontos = this.descontos.reduce(function (soma,desconto,indice){
+        console.log('soma',soma,'desconto',desconto.valor,'indice',indice)
+        console.log('soma',typeof soma,'desconto',typeof desconto.valor,'indice',typeof indice)
+        if (indice>0){
+          console.log('soma',soma)
+          return soma + parseInt(desconto.valor);
+        }
+
+      },0)
+      console.log("totalDescontos", this.totalDescontos);
+    }
   }
 }
 </script>
