@@ -1,6 +1,8 @@
 import axios from "../../../axios-auth"
 import axiosMunicipio from "../../../axios-municipio"
 import axiosEstado from "../../../axios-estado"
+const qs = require('qs');
+
 
 const token = process.env.VUE_APP_KEY;
 
@@ -29,15 +31,28 @@ export const actions = {
     async serviceGetConsultaServidorEstado(context, request) {
         const url = "wp-admin/admin-ajax.php";
         //Passagem de parâmentros por Body params conforme especificação da API
-        const params = new URLSearchParams();
-        params.append('action', 'get_meses_docs');
-        params.append('ano', request.ano);
-        params.append('orgao_id', request.orgao_id);
+        let data = qs.stringify({
+            'action': 'get_meses_docs',
+            'orgao_id': request.orgao_id,
+            'ano': request.ano
+        });
+        let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://www.transparencia.am.gov.br/wp-admin/admin-ajax.php',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data : data
+        };
+
         try{
             //Uso da biblioteca axios que faz parte do ecossistema do VUEjs
-            return await axiosEstado.post(url, params)
+            return await axiosEstado.request(config
+            )
                 .then(function (response) {
                     //Retorno do response
+                    console.log(JSON.stringify(response.data));
                     return response.data;
                 })
                 .catch(function (error) {

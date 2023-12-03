@@ -220,9 +220,9 @@
     <div class="my-20">
 <!--      <span class="my-20">{{cargosFuncoes}}</span>-->
     </div>
-    <div>
-      <span>{{remuneracao}}</span>
-    </div>
+<!--    <div>-->
+<!--      <span>{{remuneracao}}</span>-->
+<!--    </div>-->
     <div>
       <Loading :visible="loading"></Loading>
     </div>

@@ -1,6 +1,11 @@
 module.exports = {
-    // options...
     devServer: {
-        proxy: 'https://www.transparencia.am.gov.br',
+        proxy: {
+            "/api": {
+                ws: true,
+                changeOrigin: true,
+                target: "https://www.transparencia.am.gov.br/wp-admin/admin-ajax.php"
+            }
+        }
     }
 }
