@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto bg-green-700 rounded h-1/2 my-24">
+  <div class="container mx-auto bg-gray-800 rounded h-1/2 my-24">
     <h1 class="text-gray-50 text-2xl uppercase py-16">Cadastro</h1>
     <form class="container mx-auto lg:px-40">
       <div class="text-center">
